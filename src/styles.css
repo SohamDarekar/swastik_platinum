@@ -1,0 +1,96 @@
+/* Custom styles to match Chandak GreenAiry */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Section transitions */
+section {
+  transition: background-color 0.5s ease;
+}
+
+/* Heading styles */
+.font-heading {
+  letter-spacing: -0.02em;
+}
+
+/* Fixed header background blurring when scrolled */
+.scrolled-nav {
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+/* Image hover effects */
+.image-hover {
+  transition: transform 0.6s ease;
+}
+
+.image-hover:hover {
+  transform: scale(1.05);
+}
+
+/* Button hover effects */
+.btn-hover-effect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-hover-effect:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px -5px rgba(148, 124, 77, 0.5), 0 8px 10px -6px rgba(148, 124, 77, 0.3);
+}
+
+/* Hero section text effects */
+#overview h1 {
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.02em;
+}
+
+#overview p {
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Footer link animations */
+.footer-link {
+  position: relative;
+}
+
+.footer-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: #947c4d;
+  transition: width 0.3s ease;
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+/* Content section dividers */
+.section-divider {
+  width: 60px;
+  height: 3px;
+  background-color: #947c4d;
+  margin: 0 auto 40px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #947c4d;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7a673f;
+}
