@@ -434,10 +434,10 @@ function App() {
       <div className="fixed right-0 top-1/2 transform -translate-y-1/2 z-40 hidden md:block">
         <button 
           onClick={showForm}
-          className="bg-[#faf5ef] text-[#d1b989] font-medium py-4 px-3 writing-mode-vertical rotate-180 shadow-lg"
+          className="bg-[#faf5ef] text-[#d1b989] font-medium py-4 px-3 writing-mode-vertical rotate-180 shadow-lg hover:bg-secondary hover:text-white transition-colors duration-300"
           style={{ writingMode: 'vertical-rl' }}
         >
-          ENQUIRE NOW VISIT SITE
+          ENQUIRE NOW
         </button>
       </div>
 
