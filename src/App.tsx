@@ -74,9 +74,24 @@ function App() {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled ? 'bg-white shadow-md py-3' : 'bg-transparent py-5'
       }`}>
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="flex justify-between items-center">
-            <div className="font-heading text-2xl font-bold text-primary">Swastik Platinum</div>
+            <div className={`font-heading text-xl sm:text-2xl font-bold ${scrolled ? 'text-primary' : 'text-white'}`}>
+              <a href="#" className="flex items-center">
+                <div className={`bg-secondary py-1 px-3 rounded-sm shadow-md mr-2 transition-all duration-300 ${
+                  scrolled ? 'bg-opacity-100' : 'bg-opacity-90'
+                }`}>
+                  <div className="flex items-center">
+                    <img 
+                      src="/logo.png" 
+                      alt="Swastik Platinum Logo" 
+                      className="h-10 w-10 mr-2"
+                    />
+                    <span className="text-white">Swastik Platinum</span>
+                  </div>
+                </div>
+              </a>
+            </div>
             
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-10">
@@ -99,6 +114,7 @@ function App() {
             <button 
               className="lg:hidden p-2"
               onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open menu"
             >
               <Menu className={scrolled ? 'text-primary' : 'text-white'} />
             </button>
@@ -118,7 +134,18 @@ function App() {
           >
             <div className="flex flex-col h-full p-6">
               <div className="flex justify-between items-center mb-10">
-                <div className="font-heading text-2xl font-bold text-white">Swastik Platinum</div>
+                <div className="font-heading text-2xl font-bold">
+                  <div className="flex items-center">
+                    <img 
+                      src="/logo.png" 
+                      alt="Swastik Platinum Logo" 
+                      className="h-10 w-10 mr-2"
+                    />
+                    <div className="bg-secondary py-1 px-3 rounded-sm shadow-md inline-block">
+                      <span className="text-white">Swastik Platinum</span>
+                    </div>
+                  </div>
+                </div>
                 <button onClick={() => setMobileMenuOpen(false)}>
                   <X className="text-white" />
                 </button>
@@ -164,7 +191,7 @@ function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-heading text-6xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight drop-shadow-lg"
+            className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 tracking-tight drop-shadow-lg"
           >
             WHERE LUXURY <br className="hidden md:block" /> EMBRACES THE SKY
           </motion.h1>
@@ -172,7 +199,7 @@ function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl mb-10 font-light tracking-wide drop-shadow-md"
+            className="text-lg sm:text-xl md:text-2xl mb-10 font-light tracking-wide drop-shadow-md"
           >
             22 Storeys of Elegance in Vikhroli East
           </motion.p>
@@ -186,7 +213,7 @@ function App() {
               onClick={() => setIsModalOpen(true)}
               size="lg"
               variant="secondary"
-              className="px-10 py-6 text-base btn-hover-effect transition-all duration-300"
+              className="px-6 sm:px-10 py-5 sm:py-6 text-sm sm:text-base btn-hover-effect transition-all duration-300 w-full md:w-auto"
             >
               ENQUIRE NOW
             </Button>
@@ -213,13 +240,13 @@ function App() {
 
       {/* MahaRERA Info Bar */}
       <div className="bg-primary text-white py-3 px-4" id="overview-content">
-        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left">
           <div>MahaRERA Registration No: P12345678</div>
           <a 
             href="https://maharera.maharashtra.gov.in" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-secondary hover:underline"
+            className="text-secondary hover:underline mt-2 md:mt-0"
           >
             https://maharera.maharashtra.gov.in
           </a>
@@ -233,19 +260,19 @@ function App() {
 
       {/* Overview Section */}
       <AnimatedSection>
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-6">
-            <h2 className="font-heading text-4xl font-bold text-center mb-4">WHERE LUXURY EMBRACES THE SKY</h2>
-            <div className="w-20 h-1 bg-secondary mx-auto mb-10"></div>
+        <section className="py-16 sm:py-20 bg-white">
+          <div className="container mx-auto px-4 sm:px-6">
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-center mb-4">WHERE LUXURY EMBRACES THE SKY</h2>
+            <div className="w-20 h-1 bg-secondary mx-auto mb-8 sm:mb-10"></div>
             <div className="max-w-4xl mx-auto text-center">
-              <p className="text-gray-600 text-lg mb-10 leading-relaxed">
+              <p className="text-gray-600 text-base sm:text-lg mb-8 sm:mb-10 leading-relaxed px-2 sm:px-0">
                 Embark on a life beyond the ordinary, where the boundaries between nature and city life seamlessly merge. Nestled in Vikhroli East, presenting Swastik Platinum, an exclusive haven with 1 & 2 BHK luxurious balcony residences. Escape the mundane as your balcony transforms into a sanctuary, granting you breathtaking views of the city.
               </p>
-              <div className="flex flex-col md:flex-row justify-center gap-6">
-                <Button variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-white">
+              <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+                <Button variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-white text-sm sm:text-base">
                   <Download className="w-4 h-4 mr-2" /> DOWNLOAD BROCHURE
                 </Button>
-                <Button variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-white">
+                <Button variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-white text-sm sm:text-base mt-3 sm:mt-0">
                   <Download className="w-4 h-4 mr-2" /> DOWNLOAD FLOOR PLANS
                 </Button>
               </div>
@@ -327,37 +354,50 @@ function App() {
       </AnimatedSection>
 
       {/* Footer */}
-      <footer className="bg-primary text-white pt-20 pb-10">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <footer className="bg-primary text-white pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
             <div>
-              <h3 className="font-heading text-xl font-bold mb-6">Swastik Platinum</h3>
-              <p className="mb-6 text-white/80">Luxury residences in Vikhroli East, Mumbai</p>
-              <p className="flex items-start gap-3 mb-4">
-                <MapPin className="w-5 h-5 mt-1 text-secondary" />
-                <span className="text-white/80">Vikhroli East, Mumbai – 400083</span>
-              </p>
-              <p className="flex items-start gap-3 mb-4">
-                <Phone className="w-5 h-5 mt-1 text-secondary" />
-                <span className="text-white/80">+91 99999 99999</span>
-              </p>
-              <p className="flex items-start gap-3">
-                <Mail className="w-5 h-5 mt-1 text-secondary" />
-                <span className="text-white/80">info@swastikplatinum.com</span>
-              </p>
+              <div className="flex items-center mb-8 sm:mb-6">
+                <div className="bg-secondary py-1 px-3 rounded-sm shadow-md flex items-center">
+                  <img 
+                    src="/logo.png" 
+                    alt="Swastik Platinum Logo" 
+                    className="h-10 w-10 mr-2"
+                  />
+                  <h3 className="font-heading text-lg sm:text-xl font-bold text-white">Swastik Platinum</h3>
+                </div>
+              </div>
+              <p className="mb-4 sm:mb-6 text-white/80 text-sm sm:text-base">Luxury residences in Vikhroli East, Mumbai</p>
+              <div className="space-y-3 sm:space-y-4">
+                <p className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 mt-0.5 text-secondary flex-shrink-0" />
+                  <span className="text-white/80 text-sm sm:text-base">Vikhroli East, Mumbai – 400083</span>
+                </p>
+                <p className="flex items-start gap-3">
+                  <Phone className="w-5 h-5 mt-0.5 text-secondary flex-shrink-0" />
+                  <span className="text-white/80 text-sm sm:text-base">+91 99999 99999</span>
+                </p>
+                <p className="flex items-start gap-3">
+                  <Mail className="w-5 h-5 mt-0.5 text-secondary flex-shrink-0" />
+                  <span className="text-white/80 text-sm sm:text-base">info@swastikplatinum.com</span>
+                </p>
+              </div>
             </div>
-            <div>
-              <h3 className="font-heading text-xl font-bold mb-6">Quick Links</h3>
-              <ul className="space-y-4">
-                <li><a href="#overview" className="text-white/80 hover:text-secondary transition-colors">Overview</a></li>
-                <li><a href="#configurations" className="text-white/80 hover:text-secondary transition-colors">Configurations</a></li>
-                <li><a href="#location" className="text-white/80 hover:text-secondary transition-colors">Location</a></li>
-                <li><a href="#amenities" className="text-white/80 hover:text-secondary transition-colors">Amenities</a></li>
-                <li><a href="#gallery" className="text-white/80 hover:text-secondary transition-colors">Gallery</a></li>
+            <div className="mt-8 sm:mt-0">
+              <h3 className="bg-secondary font-heading text-lg sm:text-xl font-bold mb-4 sm:mb-6 bg-secondary py-1 px-3 rounded-sm shadow-md inline-block mb-6">Quick Links</h3>
+              <ul className="grid grid-cols-2 sm:grid-cols-1 gap-2 sm:gap-4">
+                <li><a href="#overview" className="text-white/80 hover:text-secondary transition-colors text-sm sm:text-base">Overview</a></li>
+                <li><a href="#configurations" className="text-white/80 hover:text-secondary transition-colors text-sm sm:text-base">Configurations</a></li>
+                <li><a href="#location" className="text-white/80 hover:text-secondary transition-colors text-sm sm:text-base">Location</a></li>
+                <li><a href="#amenities" className="text-white/80 hover:text-secondary transition-colors text-sm sm:text-base">Amenities</a></li>
+                <li><a href="#gallery" className="text-white/80 hover:text-secondary transition-colors text-sm sm:text-base">Gallery</a></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-heading text-xl font-bold mb-6">Legal</h3>
+              <div className="bg-secondary py-1 px-3 rounded-sm shadow-md inline-block mb-6">
+                <h3 className="font-heading text-lg sm:text-xl font-bold text-white">Legal</h3>
+              </div>
               <ul className="space-y-4">
                 <li><Link to="/privacy-policy" className="text-white/80 hover:text-secondary transition-colors">Privacy Policy</Link></li>
                 <li><Link to="/terms-and-conditions" className="text-white/80 hover:text-secondary transition-colors">Terms & Conditions</Link></li>
@@ -366,7 +406,9 @@ function App() {
               </ul>
             </div>
             <div>
-              <h3 className="font-heading text-xl font-bold mb-6">Connect With Us</h3>
+              <div className="bg-secondary py-1 px-3 rounded-sm shadow-md inline-block mb-6">
+                <h3 className="font-heading text-lg sm:text-xl font-bold text-white">Connect With Us</h3>
+              </div>
               <div className="flex gap-4 mb-8">
                 <a href="#" className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
@@ -388,14 +430,13 @@ function App() {
             </div>
           </div>
           <div className="border-t border-white/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-white/60 text-sm">© 2024 Swastik Platinum. All rights reserved.</p>
-            <p className="mt-4 md:mt-0 text-white/60 text-sm">MADE WITH ♥ BY MEGAPLEX</p>
+            <p className="text-white/60 text-sm">© 2025 Swastik Platinum. All rights reserved.</p>
           </div>
         </div>
       </footer>
 
-      {/* Right side enquiry floating tab */}
-      <div className="fixed right-0 top-1/2 transform -translate-y-1/2 z-40">
+      {/* Right side enquiry floating tab - hidden on small screens */}
+      <div className="fixed right-0 top-1/2 transform -translate-y-1/2 z-40 hidden md:block">
         <button 
           onClick={showForm}
           className="bg-[#faf5ef] text-[#d1b989] font-medium py-4 px-3 writing-mode-vertical rotate-180 shadow-lg"
@@ -411,9 +452,10 @@ function App() {
           onClick={showForm}
           variant="secondary"
           size="lg"
-          className="rounded-full shadow-lg"
+          className="rounded-full shadow-lg text-sm sm:text-base"
         >
-          SPEAK TO OUR REPRESENTATIVE
+          <span className="hidden sm:inline">SPEAK TO OUR REPRESENTATIVE</span>
+          <span className="sm:hidden">ENQUIRE NOW</span>
         </Button>
       </div>
 

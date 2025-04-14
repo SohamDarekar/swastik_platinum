@@ -47,12 +47,12 @@ export const Gallery = () => {
   return (
     <div className="max-w-6xl mx-auto">
       {/* Main Category Tabs */}
-      <div className="flex justify-center mb-10">
+      <div className="flex justify-center mb-8 sm:mb-10">
         <div className="inline-flex border-b border-gray-200">
           {categories.map((category) => (
             <button
               key={category.id}
-              className={`px-10 py-4 text-sm font-medium transition-all border-b-2 -mb-px ${
+              className={`px-6 sm:px-10 py-3 sm:py-4 text-sm font-medium transition-all border-b-2 -mb-px ${
                 selectedCategory === category.id 
                   ? 'text-secondary border-secondary' 
                   : 'text-gray-500 border-transparent hover:text-gray-700'
@@ -69,12 +69,12 @@ export const Gallery = () => {
       {selectedCategory === 'photos' && (
         <>
           {/* Photo Category Tabs */}
-          <div className="flex justify-center mb-16">
+          <div className="flex justify-center mb-8 sm:mb-16 overflow-x-auto -mx-4 px-4">
             <div className="inline-flex">
               {photoCategories.map((category) => (
                 <button
                   key={category.id}
-                  className={`px-8 py-3 text-sm font-medium transition-all ${
+                  className={`px-4 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all ${
                     selectedPhotoCategory === category.id 
                       ? 'bg-secondary text-white' 
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -93,7 +93,7 @@ export const Gallery = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8"
           >
             {photos[selectedPhotoCategory as keyof typeof photos].map((photo, index) => (
               <div 
@@ -109,8 +109,8 @@ export const Gallery = () => {
                   />
                 </div>
                 <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-secondary"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                  <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-secondary"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
                   </div>
                 </div>
               </div>
@@ -125,7 +125,7 @@ export const Gallery = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8"
         >
           {videos.map((video, index) => (
             <div key={index} className="overflow-hidden cursor-pointer group">
@@ -133,16 +133,16 @@ export const Gallery = () => {
                 <img 
                   src={video.thumbnail} 
                   alt={video.title} 
-                  className="w-full h-48 object-cover"
+                  className="w-full h-40 sm:h-48 object-cover"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                  <div className="w-16 h-16 rounded-full bg-secondary/90 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-secondary/90 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                   </div>
                 </div>
               </div>
               <div className="p-4">
-                <h3 className="font-medium text-lg">{video.title}</h3>
+                <h3 className="font-medium text-base sm:text-lg">{video.title}</h3>
               </div>
             </div>
           ))}
@@ -152,18 +152,22 @@ export const Gallery = () => {
       {/* Lightbox */}
       {lightboxImage && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center"
+          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
           onClick={() => setLightboxImage(null)}
         >
           <div className="relative max-w-6xl max-h-[90vh]">
             <img 
               src={lightboxImage} 
               alt="Enlarged view" 
-              className="max-w-full max-h-[90vh]"
+              className="max-w-full max-h-[90vh] object-contain"
             />
             <button 
               className="absolute top-4 right-4 bg-white rounded-full p-2"
-              onClick={() => setLightboxImage(null)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setLightboxImage(null);
+              }}
+              aria-label="Close lightbox"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>

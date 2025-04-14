@@ -9,26 +9,26 @@ export const PrivacyPolicy = () => {
   }, []);
 
   return (
-    <div className="bg-white min-h-screen pt-24 pb-20">
-      <div className="container mx-auto px-6">
+    <div className="bg-white min-h-screen pt-20 sm:pt-24 pb-16 sm:pb-20">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
-          <Link to="/" className="inline-flex items-center gap-2 text-secondary hover:underline mb-8">
+          <Link to="/" className="inline-flex items-center gap-2 text-secondary hover:underline mb-6 sm:mb-8">
             <ArrowLeft className="w-4 h-4" /> Back to Home
           </Link>
 
-          <h1 className="font-heading text-4xl font-bold mb-8">Privacy Policy</h1>
+          <h1 className="font-heading text-3xl sm:text-4xl font-bold mb-6 sm:mb-8">Privacy Policy</h1>
           
-          <div className="prose max-w-none text-gray-700">
+          <div className="prose max-w-none text-gray-700 text-sm sm:text-base">
             <p className="mb-6">
               Last updated: April 15, 2025
             </p>
 
-            <h2 className="font-heading text-2xl font-semibold mb-4 mt-8">1. Introduction</h2>
+            <h2 className="font-heading text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 mt-6 sm:mt-8">1. Introduction</h2>
             <p className="mb-4">
               Swastik Developers ("we," "our," or "us") respects your privacy and is committed to protecting it through our compliance with this policy. This policy describes the types of information we may collect from you or that you may provide when you visit the website swastikplatinum.com (our "Website") and our practices for collecting, using, maintaining, protecting, and disclosing that information.
             </p>
 
-            <h2 className="font-heading text-2xl font-semibold mb-4 mt-8">2. Information We Collect</h2>
+            <h2 className="font-heading text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 mt-6 sm:mt-8">2. Information We Collect</h2>
             <p className="mb-4">
               We collect several types of information from and about users of our Website, including information:
             </p>
@@ -38,7 +38,7 @@ export const PrivacyPolicy = () => {
               <li>About your internet connection, the equipment you use to access our Website, and usage details.</li>
             </ul>
             
-            <h2 className="font-heading text-2xl font-semibold mb-4 mt-8">3. How We Collect Your Information</h2>
+            <h2 className="font-heading text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 mt-6 sm:mt-8">3. How We Collect Your Information</h2>
             <p className="mb-4">
               We collect this information:
             </p>
@@ -47,7 +47,7 @@ export const PrivacyPolicy = () => {
               <li>Automatically as you navigate through the site. Information collected automatically may include usage details, IP addresses, and information collected through cookies and other tracking technologies.</li>
             </ul>
 
-            <h2 className="font-heading text-2xl font-semibold mb-4 mt-8">4. How We Use Your Information</h2>
+            <h2 className="font-heading text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 mt-6 sm:mt-8">4. How We Use Your Information</h2>
             <p className="mb-4">
               We use information that we collect about you or that you provide to us, including any personal information:
             </p>
@@ -61,7 +61,7 @@ export const PrivacyPolicy = () => {
               <li>For any other purpose with your consent.</li>
             </ul>
 
-            <h2 className="font-heading text-2xl font-semibold mb-4 mt-8">5. Contact Information</h2>
+            <h2 className="font-heading text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 mt-6 sm:mt-8">5. Contact Information</h2>
             <p className="mb-4">
               If you have any questions or concerns about this Privacy Policy, please contact us at:
             </p>

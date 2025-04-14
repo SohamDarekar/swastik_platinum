@@ -130,7 +130,7 @@ export const ImageCarousel = () => {
 
   return (
     <div 
-      className="relative w-full h-[600px] overflow-hidden bg-primary/5"
+      className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] overflow-hidden bg-primary/5"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -159,7 +159,7 @@ export const ImageCarousel = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
             
             {/* Text overlay */}
-            <div className="absolute bottom-[20%] left-0 right-0 px-10 md:px-20">
+            <div className="absolute bottom-[20%] left-0 right-0 px-6 md:px-10 lg:px-20">
               <motion.div
                 initial="hidden"
                 animate="visible"
@@ -167,8 +167,8 @@ export const ImageCarousel = () => {
                 key={`text-${currentIndex}`}
                 className="max-w-3xl mx-auto"
               >
-                <h2 className="text-3xl md:text-5xl text-white font-heading font-bold mb-4">{images[currentIndex].title}</h2>
-                <p className="text-xl text-white/80">{images[currentIndex].description}</p>
+                <h2 className="text-2xl sm:text-3xl md:text-5xl text-white font-heading font-bold mb-2 md:mb-4">{images[currentIndex].title}</h2>
+                <p className="text-base sm:text-lg md:text-xl text-white/80">{images[currentIndex].description}</p>
               </motion.div>
             </div>
           </div>
@@ -178,28 +178,28 @@ export const ImageCarousel = () => {
       {/* Navigation Arrows */}
       <button
         onClick={handlePrevious}
-        className="absolute left-5 top-1/2 transform -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-secondary transition-colors duration-300 focus:outline-none z-10"
+        className="absolute left-2 sm:left-5 top-1/2 transform -translate-y-1/2 w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-secondary transition-colors duration-300 focus:outline-none z-10"
         aria-label="Previous slide"
       >
-        <ChevronLeft className="w-6 h-6" />
+        <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
       </button>
 
       <button
         onClick={handleNext}
-        className="absolute right-5 top-1/2 transform -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-secondary transition-colors duration-300 focus:outline-none z-10"
+        className="absolute right-2 sm:right-5 top-1/2 transform -translate-y-1/2 w-8 h-8 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-black/30 backdrop-blur-sm text-white hover:bg-secondary transition-colors duration-300 focus:outline-none z-10"
         aria-label="Next slide"
       >
-        <ChevronRight className="w-6 h-6" />
+        <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
       </button>
 
       {/* Progress Indicators */}
-      <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-3 z-10">
+      <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-2 sm:gap-3 z-10">
         {images.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-14 h-1 rounded-full transition-all duration-300 ${
-              index === currentIndex ? 'bg-secondary w-20' : 'bg-white/40 hover:bg-white/60'
+            className={`w-8 sm:w-14 h-1 rounded-full transition-all duration-300 ${
+              index === currentIndex ? 'bg-secondary w-12 sm:w-20' : 'bg-white/40 hover:bg-white/60'
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />

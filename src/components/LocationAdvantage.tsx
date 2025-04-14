@@ -58,12 +58,12 @@ export const LocationAdvantage = () => {
   return (
     <div className="max-w-6xl mx-auto">
       {/* Category Tabs */}
-      <div className="flex justify-center mb-16 overflow-x-auto pb-2">
-        <div className="inline-flex border-b border-gray-200">
+      <div className="flex justify-center mb-12 sm:mb-16 overflow-x-auto pb-2 -mx-4 px-4">
+        <div className="inline-flex border-b border-gray-200 flex-wrap justify-center">
           {categories.map((category) => (
             <button
               key={category.id}
-              className={`px-6 py-4 text-sm font-medium transition-all whitespace-nowrap border-b-2 -mb-px ${
+              className={`px-3 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm font-medium transition-all whitespace-nowrap border-b-2 -mb-px ${
                 activeCategory === category.id 
                   ? 'text-secondary border-secondary' 
                   : 'text-gray-500 border-transparent hover:text-gray-700'
@@ -77,27 +77,27 @@ export const LocationAdvantage = () => {
       </div>
 
       {/* Location Content */}
-      <div className="grid md:grid-cols-2 gap-16 items-center">
+      <div className="grid md:grid-cols-2 gap-8 sm:gap-16 items-center">
         <motion.div 
           key={activeCategory}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="space-y-10"
+          className="space-y-8 sm:space-y-10"
         >
           {activeItems.map((item, index) => (
-            <div key={index} className="flex items-start gap-5">
-              <div className="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center mt-1">
-                <item.icon className="w-7 h-7 text-secondary" />
+            <div key={index} className="flex items-start gap-4 sm:gap-5">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-secondary/10 flex items-center justify-center mt-1 flex-shrink-0">
+                <item.icon className="w-6 h-6 sm:w-7 sm:h-7 text-secondary" />
               </div>
               <div>
-                <h3 className="font-heading text-xl font-semibold mb-3">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                <h3 className="font-heading text-lg sm:text-xl font-semibold mb-2 sm:mb-3">{item.title}</h3>
+                <p className="text-gray-600 leading-relaxed text-sm sm:text-base">{item.description}</p>
               </div>
             </div>
           ))}
         </motion.div>
-        <div className="relative h-[450px] rounded-lg overflow-hidden shadow-xl">
+        <div className="relative h-[350px] sm:h-[450px] rounded-lg overflow-hidden shadow-xl">
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.872009406282!2d72.93112047537831!3d19.113270050801102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c76195e6eab5%3A0x81b6a2672958ae1f!2sSwastik%20Platinum!5e0!3m2!1sen!2sin!4v1744644395343!5m2!1sen!2sin&no-reviews=true"
             width="100%"
@@ -112,7 +112,7 @@ export const LocationAdvantage = () => {
               href="https://maps.app.goo.gl/sxfc25LvpTfFnxu66" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-white hover:underline"
+              className="text-white hover:underline text-sm sm:text-base"
             >
               CLICK TO VIEW ON GOOGLE MAPS
             </a>
