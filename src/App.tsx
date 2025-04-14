@@ -94,20 +94,25 @@ function App() {
             </div>
             
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-10">
-              <a href="#overview" className={`text-sm font-medium hover:text-secondary transition-colors ${scrolled ? 'text-primary' : 'text-white'}`}>OVERVIEW</a>
-              <a href="#location" className={`text-sm font-medium hover:text-secondary transition-colors ${scrolled ? 'text-primary' : 'text-white'}`}>LOCATION</a>
-              <a href="#configurations" className={`text-sm font-medium hover:text-secondary transition-colors ${scrolled ? 'text-primary' : 'text-white'}`}>CONFIGURATIONS</a>
-              <a href="#amenities" className={`text-sm font-medium hover:text-secondary transition-colors ${scrolled ? 'text-primary' : 'text-white'}`}>AMENITIES</a>
-              <a href="#gallery" className={`text-sm font-medium hover:text-secondary transition-colors ${scrolled ? 'text-primary' : 'text-white'}`}>GALLERY</a>
-              <Button 
-                onClick={() => setIsModalOpen(true)} 
-                variant={scrolled ? "secondary" : "outline"}
-                size="sm"
-                className={`ml-4 text-sm ${!scrolled && 'border-white text-white hover:bg-white/20'}`}
-              >
-                ENQUIRE NOW
-              </Button>
+            <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+              <div className="flex items-center space-x-5 xl:space-x-7">
+                <a href="#overview" className={`text-sm font-medium hover:text-secondary transition-colors ${scrolled ? 'text-primary' : 'text-white'}`}>OVERVIEW</a>
+                <a href="#configurations" className={`text-sm font-medium hover:text-secondary transition-colors ${scrolled ? 'text-primary' : 'text-white'}`}>CONFIGURATIONS</a>
+                <a href="#location" className={`text-sm font-medium hover:text-secondary transition-colors ${scrolled ? 'text-primary' : 'text-white'}`}>LOCATION</a>
+                <a href="#amenities" className={`text-sm font-medium hover:text-secondary transition-colors ${scrolled ? 'text-primary' : 'text-white'}`}>AMENITIES</a>
+                <a href="#gallery" className={`text-sm font-medium hover:text-secondary transition-colors ${scrolled ? 'text-primary' : 'text-white'}`}>GALLERY</a>
+              </div>
+              <div className="flex items-center pl-2 border-l border-gray-300/30">
+                <Link to="/about-developer" className={`text-sm font-medium hover:text-secondary transition-colors ${scrolled ? 'text-primary' : 'text-white'} mr-5`}>DEVELOPER</Link>
+                <Button 
+                  onClick={() => setIsModalOpen(true)} 
+                  variant={scrolled ? "secondary" : "outline"}
+                  size="sm"
+                  className={`text-sm ${!scrolled && 'border-white text-white hover:bg-white/20'}`}
+                >
+                  ENQUIRE NOW
+                </Button>
+              </div>
             </div>
             
             {/* Mobile Menu Button */}
@@ -151,11 +156,16 @@ function App() {
                 </button>
               </div>
               <div className="flex flex-col space-y-6">
-                <a href="#overview" onClick={() => setMobileMenuOpen(false)} className="text-white text-xl font-medium">OVERVIEW</a>
-                <a href="#location" onClick={() => setMobileMenuOpen(false)} className="text-white text-xl font-medium">LOCATION</a>
-                <a href="#configurations" onClick={() => setMobileMenuOpen(false)} className="text-white text-xl font-medium">CONFIGURATIONS</a>
-                <a href="#amenities" onClick={() => setMobileMenuOpen(false)} className="text-white text-xl font-medium">AMENITIES</a>
-                <a href="#gallery" onClick={() => setMobileMenuOpen(false)} className="text-white text-xl font-medium">GALLERY</a>
+                <h3 className="text-secondary font-medium text-lg mb-2">NAVIGATION</h3>
+                <a href="#overview" onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Overview</a>
+                <a href="#configurations" onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Configurations</a>
+                <a href="#location" onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Location</a>
+                <a href="#amenities" onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Amenities</a>
+                <a href="#gallery" onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">Gallery</a>
+                
+                <div className="w-1/3 h-px bg-white/20 my-2"></div>
+                
+                <Link to="/about-developer" onClick={() => setMobileMenuOpen(false)} className="text-white text-lg font-medium">About Developer</Link>
               </div>
               <div className="mt-auto">
                 <Button 
@@ -335,23 +345,7 @@ function App() {
         </section>
       </AnimatedSection>
 
-      {/* About Developer */}
-      <AnimatedSection>
-        <section className="py-20 bg-accent">
-          <div className="container mx-auto px-6">
-            <h2 className="font-heading text-4xl font-bold text-center mb-4">ABOUT THE DEVELOPER</h2>
-            <div className="w-20 h-1 bg-secondary mx-auto mb-10"></div>
-            <div className="max-w-3xl mx-auto text-center">
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                Suvasya Builders and Developers LLP has been at the forefront of Mumbai's real estate development for over two decades. With successful projects like Swastik Pearl and Swastik Coral, we have established ourselves as a trusted name in quality construction and timely delivery.
-              </p>
-              <p className="text-gray-600 leading-relaxed">
-                Our vision is to create living spaces that blend luxury with functionality, ensuring every resident experiences the joy of coming home to a well-designed, thoughtfully crafted space.
-              </p>
-            </div>
-          </div>
-        </section>
-      </AnimatedSection>
+      
 
       {/* Footer */}
         <footer className="bg-primary text-white pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
@@ -392,6 +386,7 @@ function App() {
                 <li><a href="#location" className="text-white/80 hover:text-secondary transition-colors text-sm sm:text-base">Location</a></li>
                 <li><a href="#amenities" className="text-white/80 hover:text-secondary transition-colors text-sm sm:text-base">Amenities</a></li>
                 <li><a href="#gallery" className="text-white/80 hover:text-secondary transition-colors text-sm sm:text-base">Gallery</a></li>
+                <li><Link to="/about-developer" className="text-white/80 hover:text-secondary transition-colors text-sm sm:text-base">About Developer</Link></li>
               </ul>
             </div>
             <div>

@@ -5,6 +5,7 @@ import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { TermsAndConditions } from './pages/TermsAndConditions';
 import { Disclaimer } from './pages/Disclaimer';
 import { Sitemap } from './pages/Sitemap';
+import { AboutDeveloper } from './pages/AboutDeveloper';
 
 export const AppRoutes = () => {
   return (
@@ -14,6 +15,7 @@ export const AppRoutes = () => {
       <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
       <Route path="/disclaimer" element={<Disclaimer />} />
       <Route path="/sitemap" element={<Sitemap />} />
+      <Route path="/about-developer" element={<AboutDeveloper />} />
     </Routes>
   );
 };
