@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { convertToCSV, downloadCSV, getFormattedDate } from '../lib/exportUtils';
 
 interface Enquiry {
   _id: string;
@@ -15,6 +16,7 @@ export const Admin = () => {
   const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isExporting, setIsExporting] = useState(false);
 
   useEffect(() => {
     fetchEnquiries();
@@ -44,6 +46,37 @@ export const Admin = () => {
     }
   };
 
+  const handleExport = () => {
+    try {
+      setIsExporting(true);
+      
+      // Define columns to export
+      const columns = ['name', 'email', 'phone', 'message', 'scheduleVisit', 'source', 'createdAt'];
+      
+      // Convert enquiries to CSV format
+      const csvContent = convertToCSV(
+        // Format dates for better readability in Excel
+        enquiries.map(enquiry => ({
+          ...enquiry,
+          createdAt: new Date(enquiry.createdAt).toLocaleString(),
+          message: enquiry.message || ''
+        })),
+        columns
+      );
+      
+      // Generate filename with current date
+      const filename = `swastik-platinum-enquiries-${getFormattedDate()}.csv`;
+      
+      // Download the CSV file
+      downloadCSV(csvContent, filename);
+    } catch (err) {
+      console.error('Error exporting data:', err);
+      alert('Failed to export data. Please try again.');
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-12">
@@ -65,7 +98,29 @@ export const Admin = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Enquiries Admin Panel</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Enquiries Admin Panel</h1>
+        
+        <button
+          onClick={handleExport}
+          disabled={isExporting || enquiries.length === 0}
+          className={`px-4 py-2 rounded flex items-center space-x-2 
+            ${(isExporting || enquiries.length === 0) 
+              ? 'bg-gray-300 cursor-not-allowed' 
+              : 'bg-green-600 hover:bg-green-700 text-white'}`}
+        >
+          <span>
+            {isExporting ? 'Exporting...' : 'Export to CSV'}
+          </span>
+          {!isExporting && (
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          )}
+        </button>
+      </div>
       
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
