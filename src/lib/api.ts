@@ -3,7 +3,7 @@ import { EnquiryFormData, ApiResponse } from '../types/enquiry';
 // Dynamic API URL for development/production environments
 const API_URL = import.meta.env.VITE_API_URL || 
                 (import.meta.env.PROD 
-                  ? '/api'  // Use relative path in production
+                  ? 'https://swastik-platinum.onrender.com/api' // Use full URL in production
                   : 'http://localhost:5000/api');
 
 export async function submitEnquiry(data: EnquiryFormData): Promise<ApiResponse> {

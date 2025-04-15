@@ -39,10 +39,9 @@ const Enquiry = mongoose.model('Enquiry', enquirySchema);
 // CORS configuration
 app.use(cors({
   origin: [
-    'http://localhost:3000', 
-    'http://localhost:5173', 
-    'https://swastik-platinum.onrender.com',
-    'https://swastik-platinum.onrender.com/admin', // Add Render frontend URL
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'https://swastik-platinum.onrender.com', // Ensure this matches your deployed frontend URL
     process.env.FRONTEND_URL || '*'
   ],
   methods: ['GET', 'POST', 'DELETE', 'PUT'],
