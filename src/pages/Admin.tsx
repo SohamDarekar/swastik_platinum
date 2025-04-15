@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { convertToCSV, downloadCSV, getFormattedDate } from '../lib/exportUtils';
 import { Eye, EyeOff } from 'lucide-react';
+import { fetchEnquiries } from '../lib/api';
 
-// Get the API_URL from the environment or use the same logic as in api.ts
-const API_URL = import.meta.env.VITE_API_URL || 
-                (import.meta.env.PROD 
-                  ? 'https://swastik-platinum.onrender.com/api'  // Use deployed backend URL
-                  : 'http://localhost:5000/api');
+// Get the API_URL from the api.ts file
+const API_URL = 'https://swastik-platinum.onrender.com';
 
 interface Enquiry {
   _id: string;
@@ -35,21 +33,18 @@ export const Admin = () => {
   const CORRECT_PASSWORD = 'MegaplexPrime';
 
   // Use useCallback to prevent the function from being recreated on each render
-  const fetchEnquiries = useCallback(async () => {
+  const fetchEnquiriesData = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_URL}/enquiry`);
+      console.log('Fetching enquiries from:', `${API_URL}/api/enquiry`);
       
-      if (!response.ok) {
-        throw new Error('Failed to fetch enquiries');
-      }
+      // Use the fetchEnquiries function from api.ts
+      const result = await fetchEnquiries();
       
-      const data = await response.json();
-      
-      if (data.success) {
-        setEnquiries(data.data);
+      if (result.success) {
+        setEnquiries(result.data);
       } else {
-        throw new Error(data.error || 'Failed to fetch enquiries');
+        throw new Error(result.error || 'Failed to fetch enquiries');
       }
     } catch (error) {
       console.error('Error fetching enquiries:', error);
@@ -61,9 +56,9 @@ export const Admin = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      fetchEnquiries();
+      fetchEnquiriesData();
     }
-  }, [isAuthenticated, fetchEnquiries]);
+  }, [isAuthenticated, fetchEnquiriesData]);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -118,7 +113,7 @@ export const Admin = () => {
 
     try {
       setIsDeleting(id);
-      const response = await fetch(`${API_URL}/enquiry/${id}`, {
+      const response = await fetch(`${API_URL}/api/enquiry/${id}`, {
         method: 'DELETE',
       });
       

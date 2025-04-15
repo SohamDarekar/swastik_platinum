@@ -71,18 +71,7 @@ export const EnquiryForm = ({ isOpen, onClose }: EnquiryFormProps) => {
       console.log('Submitting form data:', enquiryData);
       
       // Submit to API
-      let response;
-      try {
-        response = await submitEnquiry(enquiryData);
-      } catch (fetchError) {
-        console.error('Fetch error:', fetchError);
-        // Fallback to simulated success for development
-        response = {
-          success: true,
-          message: 'Enquiry submitted successfully (simulated)',
-          data: { id: 'mock-id-' + Date.now(), ...enquiryData }
-        };
-      }
+      const response = await submitEnquiry(enquiryData);
       
       if (!response.success) {
         throw new Error(response.error || 'Failed to submit enquiry');

@@ -41,7 +41,7 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'http://localhost:5173',
-    'https://swastik-platinum.onrender.com', // Ensure this matches your deployed frontend URL
+    'https://swastik-platinum.onrender.com', // Deployed frontend URL
     process.env.FRONTEND_URL || '*'
   ],
   methods: ['GET', 'POST', 'DELETE', 'PUT'],
@@ -158,9 +158,12 @@ app.delete('/api/enquiry/:id', async (req, res) => {
   }
 });
 
-// Default route for /api
+// Add a proper response for the `/api` route
 app.get('/api', (req, res) => {
-  res.status(404).json({ error: 'API endpoint not found' });
+  res.json({
+    message: 'Welcome to the Swastik Platinum API',
+    availableEndpoints: ['/api/health', '/api/enquiry', '/api/enquiry/submit']
+  });
 });
 
 // Serve static files if in production
