@@ -94,10 +94,16 @@ By default, Render will automatically deploy new changes when you push to your G
    - MongoDB connection failure: Verify your connection string and network access settings
    - Build failures: Check if all dependencies are properly included in package.json
 
-### If form submissions don't work:
+### If form submissions or admin page don't work:
 
 1. Open your browser's developer console to check for errors
-2. The most common issue is CORS errors, which our updated server configuration should handle
+2. API connection issues:
+   - Make sure all API URLs in the code use relative paths ('/api/...') when in production
+   - Check the CORS configuration in your server
+   - Verify the API endpoints are correctly defined and reachable
+3. If you see "NetworkError" when attempting to fetch resources:
+   - This often means your API routes aren't configured correctly for production
+   - Ensure the server.js file properly handles API routes before serving the static frontend
 
 ## For Your Interview
 

@@ -160,11 +160,13 @@ if (process.env.NODE_ENV === 'production') {
   
   // Handle React routing, return all requests to React app
   app.get('*', (req, res) => {
-    if (req.url.startsWith('/api')) {
+    // Only handle non-API requests with the React app
+    if (!req.url.startsWith('/api')) {
+      res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    } else {
       // If it's an API request that wasn't caught by previous routes, return 404
-      return res.status(404).json({ error: 'API endpoint not found' });
+      res.status(404).json({ error: 'API endpoint not found' });
     }
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
   });
   
   console.log('Running in production mode - serving static files');

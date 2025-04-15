@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { convertToCSV, downloadCSV, getFormattedDate } from '../lib/exportUtils';
 import { Eye, EyeOff } from 'lucide-react';
+import { fetchEnquiries } from '../lib/api'; // Import fetchEnquiries function
+
+// Get the API_URL from the environment or use the same logic as in api.ts
+const API_URL = import.meta.env.VITE_API_URL || 
+                (import.meta.env.PROD 
+                  ? '/api'  // In production, use relative path
+                  : 'http://localhost:5000/api');
 
 interface Enquiry {
   _id: string;
@@ -51,7 +58,7 @@ export const Admin = () => {
   const fetchEnquiries = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/api/enquiry');
+      const response = await fetch(`${API_URL}/enquiry`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch enquiries');
@@ -103,7 +110,7 @@ export const Admin = () => {
     }
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDeleteEnquiry = async (id: string) => {
     // Show confirmation dialog
     if (!window.confirm('Are you sure you want to delete this enquiry? This action cannot be undone.')) {
       return;
@@ -111,7 +118,7 @@ export const Admin = () => {
 
     try {
       setIsDeleting(id);
-      const response = await fetch(`http://localhost:5000/api/enquiry/${id}`, {
+      const response = await fetch(`${API_URL}/enquiry/${id}`, {
         method: 'DELETE',
       });
       
@@ -266,7 +273,7 @@ export const Admin = () => {
                 <td className="py-2 px-4 border-b">{new Date(enquiry.createdAt).toLocaleString()}</td>
                 <td className="py-2 px-4 border-b">
                   <button
-                    onClick={() => handleDelete(enquiry._id)}
+                    onClick={() => handleDeleteEnquiry(enquiry._id)}
                     disabled={isDeleting === enquiry._id}
                     className={`p-2 rounded ${
                       isDeleting === enquiry._id
