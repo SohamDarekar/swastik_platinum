@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { convertToCSV, downloadCSV, getFormattedDate } from '../lib/exportUtils';
+import { Eye, EyeOff } from 'lucide-react';
 
 interface Enquiry {
   _id: string;
@@ -18,10 +19,34 @@ export const Admin = () => {
   const [error, setError] = useState<string | null>(null);
   const [isExporting, setIsExporting] = useState(false);
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
+  
+  // Authentication states
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
+  
+  const CORRECT_PASSWORD = 'MegaplexPrime';
 
   useEffect(() => {
-    fetchEnquiries();
-  }, []);
+    if (isAuthenticated) {
+      fetchEnquiries();
+    }
+  }, [isAuthenticated]);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === CORRECT_PASSWORD) {
+      setIsAuthenticated(true);
+      setPasswordError('');
+    } else {
+      setPasswordError('Incorrect password. Please try again.');
+    }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const fetchEnquiries = async () => {
     try {
@@ -110,6 +135,57 @@ export const Admin = () => {
     }
   };
 
+  // If not authenticated, show login form
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="max-w-md w-full p-8 bg-white rounded-lg shadow-lg">
+          <h1 className="text-2xl font-bold text-center mb-6">Admin Login</h1>
+          
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter password"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-600"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+              {passwordError && (
+                <p className="mt-2 text-sm text-red-600">{passwordError}</p>
+              )}
+            </div>
+            
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            >
+              Login
+            </button>
+          </form>
+          
+          <div className="mt-4 text-center text-sm text-gray-600">
+            <p>Access restricted to authorized personnel only.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-12">
@@ -134,25 +210,34 @@ export const Admin = () => {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Enquiries Admin Panel</h1>
         
-        <button
-          onClick={handleExport}
-          disabled={isExporting || enquiries.length === 0}
-          className={`px-4 py-2 rounded flex items-center space-x-2 
-            ${(isExporting || enquiries.length === 0) 
-              ? 'bg-gray-300 cursor-not-allowed' 
-              : 'bg-green-600 hover:bg-green-700 text-white'}`}
-        >
-          <span>
-            {isExporting ? 'Exporting...' : 'Export to CSV'}
-          </span>
-          {!isExporting && (
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-          )}
-        </button>
+        <div className="flex space-x-4">
+          <button
+            onClick={() => setIsAuthenticated(false)}
+            className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300 text-gray-800"
+          >
+            Logout
+          </button>
+          
+          <button
+            onClick={handleExport}
+            disabled={isExporting || enquiries.length === 0}
+            className={`px-4 py-2 rounded flex items-center space-x-2 
+              ${(isExporting || enquiries.length === 0) 
+                ? 'bg-gray-300 cursor-not-allowed' 
+                : 'bg-green-600 hover:bg-green-700 text-white'}`}
+          >
+            <span>
+              {isExporting ? 'Exporting...' : 'Export to CSV'}
+            </span>
+            {!isExporting && (
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
       
       <div className="overflow-x-auto">
