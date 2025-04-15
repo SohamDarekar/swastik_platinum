@@ -9,14 +9,14 @@ const configurations = [
     carpetArea: '425 sq.ft.',
     price: '₹85 Lakhs*',
     features: ['Modern Kitchen', 'Spacious Balcony', 'Premium Flooring', 'Cross Ventilation'],
-    image: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&q=80'
+    image: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&q=80&w=800&h=600'
   },
   {
     type: '2 BHK',
     carpetArea: '625 sq.ft.',
     price: '₹1.25 Cr*',
     features: ['Master Bedroom', 'Separate Dining Area', 'Two Balconies', 'Luxury Fittings'],
-    image: 'https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&q=80'
+    image: 'https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&q=80&w=800&h=600'
   }
 ];
 
@@ -52,11 +52,14 @@ export const ConfigurationCards = () => {
         transition={{ duration: 0.5 }}
         className="grid md:grid-cols-2 gap-6 sm:gap-8 bg-white rounded-lg shadow-xl overflow-hidden"
       >
-        <div className="relative h-64 sm:h-auto min-h-[300px] md:min-h-[400px]">
+        <div className="relative h-64 sm:h-[350px] md:h-[400px] rounded-lg overflow-hidden">
           <img 
             src={configurations[selectedConfig].image} 
             alt={`${configurations[selectedConfig].type} Layout`}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-lg"
+            loading="lazy"
+            width="800"
+            height="600"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 sm:p-8">
             <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white mb-2">{configurations[selectedConfig].type}</h3>

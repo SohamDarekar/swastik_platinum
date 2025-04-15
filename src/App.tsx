@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from './components/Button';
 import { MapPin, Phone, Mail, ChevronRight, Download, ChevronUp, Menu, X } from 'lucide-react';
-import { ImageCarousel } from './components/ImageCarousel';
-import { LocationAdvantage } from './components/LocationAdvantage';
-import { ConfigurationCards } from './components/ConfigurationCards';
-import { Amenities } from './components/Amenities';
 import { EnquiryForm } from './components/EnquiryForm';
 import { AnimatedSection } from './components/AnimatedSection';
-import { ProjectHighlights } from './components/ProjectHighlights';
-import { Gallery } from './components/Gallery';
 import { CircleIcon } from './components/CircleIcon';
 import { Link } from 'react-router-dom';
+import { LoadingSpinner } from './components/LoadingSpinner';
+
+// Lazy load components
+const ImageCarousel = lazy(() => import('./components/ImageCarousel').then(module => ({ default: module.ImageCarousel })));
+const LocationAdvantage = lazy(() => import('./components/LocationAdvantage').then(module => ({ default: module.LocationAdvantage })));
+const ConfigurationCards = lazy(() => import('./components/ConfigurationCards').then(module => ({ default: module.ConfigurationCards })));
+const Amenities = lazy(() => import('./components/Amenities').then(module => ({ default: module.Amenities })));
+const ProjectHighlights = lazy(() => import('./components/ProjectHighlights').then(module => ({ default: module.ProjectHighlights })));
+const Gallery = lazy(() => import('./components/Gallery').then(module => ({ default: module.Gallery })));
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(true); // Start with the form open
@@ -86,6 +89,9 @@ function App() {
                       src="/logo.png" 
                       alt="Swastik Platinum Logo" 
                       className="h-10 w-10 mr-2"
+                      loading="eager" 
+                      width="40"
+                      height="40"
                     />
                     <span className="text-white">Swastik Platinum</span>
                   </div>
@@ -190,7 +196,7 @@ function App() {
         id="overview"
         className="relative h-screen flex items-center justify-center"
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80")',
+          backgroundImage: 'url("https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=1920&h=1080")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -265,7 +271,9 @@ function App() {
 
       {/* Project Highlights */}
       <AnimatedSection>
-        <ProjectHighlights />
+        <Suspense fallback={<LoadingSpinner />}>
+          <ProjectHighlights />
+        </Suspense>
       </AnimatedSection>
 
       {/* Overview Section */}
@@ -298,7 +306,9 @@ function App() {
             <h2 className="font-heading text-4xl font-bold text-center mb-4">CONFIGURATIONS</h2>
             <h3 className="text-xl text-center mb-4 text-gray-600 font-light">WHERE ELEGANCE FINDS ITS HOME</h3>
             <div className="w-20 h-1 bg-secondary mx-auto mb-16"></div>
-            <ConfigurationCards />
+            <Suspense fallback={<LoadingSpinner />}>
+              <ConfigurationCards />
+            </Suspense>
           </div>
         </section>
       </AnimatedSection>
@@ -310,7 +320,9 @@ function App() {
             <h2 className="font-heading text-4xl font-bold text-center mb-4">LOCATION</h2>
             <h3 className="text-xl text-center mb-4 text-gray-600 font-light">WHERE THE WORLD IS AT YOUR FINGERTIPS</h3>
             <div className="w-20 h-1 bg-secondary mx-auto mb-16"></div>
-            <LocationAdvantage />
+            <Suspense fallback={<LoadingSpinner />}>
+              <LocationAdvantage />
+            </Suspense>
           </div>
         </section>
       </AnimatedSection>
@@ -322,7 +334,9 @@ function App() {
             <h2 className="font-heading text-4xl font-bold text-center mb-4">AMENITIES</h2>
             <h3 className="text-xl text-center mb-4 text-gray-600 font-light">WHERE LUXURY LIFE REIGNS SUPREME</h3>
             <div className="w-20 h-1 bg-secondary mx-auto mb-16"></div>
-            <Amenities />
+            <Suspense fallback={<LoadingSpinner />}>
+              <Amenities />
+            </Suspense>
           </div>
         </section>
       </AnimatedSection>
@@ -337,10 +351,14 @@ function App() {
             
             {/* Added ImageCarousel here before the Gallery component */}
             <div className="mb-16 overflow-hidden rounded-lg shadow-xl">
-              <ImageCarousel />
+              <Suspense fallback={<LoadingSpinner />}>
+                <ImageCarousel />
+              </Suspense>
             </div>
             
-            <Gallery />
+            <Suspense fallback={<LoadingSpinner />}>
+              <Gallery />
+            </Suspense>
           </div>
         </section>
       </AnimatedSection>
@@ -358,6 +376,9 @@ function App() {
                     src="/logo.png" 
                     alt="Swastik Platinum Logo" 
                     className="h-10 w-10 mr-2"
+                    loading="lazy"
+                    width="40"
+                    height="40"
                   />
                   <h3 className="font-heading text-lg sm:text-xl font-bold text-white">Swastik Platinum</h3>
                 </div>

@@ -22,9 +22,12 @@ export const AboutDeveloper = () => {
           
           <div className="mb-16">
             <img 
-              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80"
+              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200&h=800"
               alt="Swastik Developers Corporate Building" 
               className="w-full h-80 sm:h-96 object-cover rounded-lg shadow-lg mb-8"
+              loading="lazy"
+              width="1200"
+              height="800"
             />
             
             <motion.div 
@@ -132,7 +135,14 @@ export const AboutDeveloper = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
                 <div className="aspect-w-16 aspect-h-10">
-                  <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&q=80" alt="Swastik Avighna" className="object-cover w-full h-full" />
+                  <img 
+                    src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&q=80&w=600&h=400" 
+                    alt="Swastik Avighna" 
+                    className="object-cover w-full h-full" 
+                    loading="lazy"
+                    width="600"
+                    height="400"
+                  />
                 </div>
                 <div className="p-4 sm:p-6">
                   <h3 className="font-heading text-lg sm:text-xl font-semibold mb-2">Swastik Avighna</h3>
@@ -141,7 +151,14 @@ export const AboutDeveloper = () => {
               </div>
               <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
                 <div className="aspect-w-16 aspect-h-10">
-                  <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80" alt="Swastik Pearl" className="object-cover w-full h-full" />
+                  <img 
+                    src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=600&h=400" 
+                    alt="Swastik Pearl" 
+                    className="object-cover w-full h-full" 
+                    loading="lazy"
+                    width="600"
+                    height="400"
+                  />
                 </div>
                 <div className="p-4 sm:p-6">
                   <h3 className="font-heading text-lg sm:text-xl font-semibold mb-2">Swastik Pearl</h3>
@@ -150,7 +167,14 @@ export const AboutDeveloper = () => {
               </div>
               <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
                 <div className="aspect-w-16 aspect-h-10">
-                  <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80" alt="Swastik Elegance" className="object-cover w-full h-full" />
+                  <img 
+                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=600&h=400" 
+                    alt="Swastik Elegance" 
+                    className="object-cover w-full h-full" 
+                    loading="lazy"
+                    width="600"
+                    height="400"
+                  />
                 </div>
                 <div className="p-4 sm:p-6">
                   <h3 className="font-heading text-lg sm:text-xl font-semibold mb-2">Swastik Elegance</h3>

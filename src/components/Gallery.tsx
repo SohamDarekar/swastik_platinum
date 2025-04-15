@@ -14,29 +14,29 @@ const photoCategories = [
 
 const photos = {
   external: [
-    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=600&h=400',
+    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=600&h=400',
+    'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=600&h=400',
+    'https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&q=80&w=600&h=400',
   ],
   internal: [
-    'https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1600607687644-c7f34c43d2fd?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&q=80&w=600&h=400',
+    'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&q=80&w=600&h=400',
+    'https://images.unsplash.com/photo-1600607687644-c7f34c43d2fd?auto=format&fit=crop&q=80&w=600&h=400',
+    'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&q=80&w=600&h=400',
   ],
   amenities: [
-    'https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1616627561839-074385245ff6?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1571622840901-92ae138bd36e?auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?auto=format&fit=crop&q=80&w=600&h=400',
+    'https://images.unsplash.com/photo-1616627561839-074385245ff6?auto=format&fit=crop&q=80&w=600&h=400',
+    'https://images.unsplash.com/photo-1571622840901-92ae138bd36e?auto=format&fit=crop&q=80&w=600&h=400',
+    'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=600&h=400',
   ]
 };
 
 const videos = [
-  { thumbnail: 'https://images.unsplash.com/photo-1517164850305-99a27ae571ea?auto=format&fit=crop&q=80', title: 'Project Overview' },
-  { thumbnail: 'https://images.unsplash.com/photo-1494932328153-c57e516cbd28?auto=format&fit=crop&q=80', title: 'Virtual Tour' },
-  { thumbnail: 'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&q=80', title: 'Amenities Showcase' },
+  { thumbnail: 'https://images.unsplash.com/photo-1517164850305-99a27ae571ea?auto=format&fit=crop&q=80&w=600&h=400', title: 'Project Overview' },
+  { thumbnail: 'https://images.unsplash.com/photo-1494932328153-c57e516cbd28?auto=format&fit=crop&q=80&w=600&h=400', title: 'Virtual Tour' },
+  { thumbnail: 'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&q=80&w=600&h=400', title: 'Amenities Showcase' },
 ];
 
 export const Gallery = () => {
@@ -106,6 +106,9 @@ export const Gallery = () => {
                     src={photo} 
                     alt={`Gallery image ${index + 1}`} 
                     className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
+                    width="600"
+                    height="400"
                   />
                 </div>
                 <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -134,6 +137,9 @@ export const Gallery = () => {
                   src={video.thumbnail} 
                   alt={video.title} 
                   className="w-full h-40 sm:h-48 object-cover"
+                  loading="lazy"
+                  width="600"
+                  height="400"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                   <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-secondary/90 flex items-center justify-center">

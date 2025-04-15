@@ -38,10 +38,10 @@ const amenitiesPages = [
 
 // Modern lifestyle amenity images - using more reliable sources with consistent dimensions
 const amenityImages = [
-  "https://images.unsplash.com/photo-1573052905904-34ad8c27f0cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&h=700&q=80", // Modern pool
-  "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&h=700&q=80", // Modern gym alternative
-  "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&h=700&q=80", // Modern gardens
-  "https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&h=700&q=80", // Modern lounge alternative
+  "https://images.unsplash.com/photo-1573052905904-34ad8c27f0cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600&q=80", // Modern pool
+  "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600&q=80", // Modern gym alternative
+  "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600&q=80", // Modern gardens
+  "https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600&q=80", // Modern lounge alternative
 ];
 
 export const Amenities = () => {
@@ -200,8 +200,11 @@ export const Amenities = () => {
                     src={amenityImages[currentImageIndex]} 
                     alt={`Premium amenity ${currentImageIndex + 1}`}
                     className="w-full h-full object-cover rounded-xl"
+                    loading="lazy"
+                    width="800"
+                    height="600"
                     onError={(e) => {
-                      e.currentTarget.src = "https://via.placeholder.com/1000x700/e2e8f0/64748b?text=Amenity+Image";
+                      e.currentTarget.src = "https://via.placeholder.com/800x600/e2e8f0/64748b?text=Amenity+Image";
                     }}
                   />
                 </motion.div>

@@ -4,27 +4,27 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const images = [
   {
-    url: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80',
+    url: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=1200&h=800',
     title: 'Luxury Living Experience',
     description: 'Where Elegance Meets Modern Design'
   },
   {
-    url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80',
+    url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1200&h=800',
     title: 'Premium Residences',
     description: 'Designed for Discerning Homeowners'
   },
   {
-    url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80',
+    url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200&h=800',
     title: 'Thoughtful Architecture',
     description: 'Making Every Day Extraordinary'
   },
   {
-    url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80',
+    url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1200&h=800',
     title: 'Urban Sanctuary',
     description: 'Peaceful Living in the Heart of the City'
   },
   {
-    url: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80',
+    url: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=1200&h=800',
     title: 'Endless Possibilities',
     description: 'A Home That Grows With You'
   }
@@ -37,6 +37,7 @@ export const ImageCarousel = () => {
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+  const [imagesLoaded, setImagesLoaded] = useState<boolean[]>(Array(images.length).fill(false));
 
   const startAutoPlay = () => {
     if (autoPlayRef.current) clearInterval(autoPlayRef.current);
@@ -98,6 +99,20 @@ export const ImageCarousel = () => {
     }
   };
 
+  // Preload the next image
+  useEffect(() => {
+    const nextIndex = (currentIndex + 1) % images.length;
+    const img = new Image();
+    img.src = images[nextIndex].url;
+  }, [currentIndex]);
+
+  // Mark image as loaded
+  const handleImageLoad = (index: number) => {
+    const newLoadedState = [...imagesLoaded];
+    newLoadedState[index] = true;
+    setImagesLoaded(newLoadedState);
+  };
+
   // Variants for slide animations
   const slideVariants = {
     enter: (direction: number) => ({
@@ -152,9 +167,13 @@ export const ImageCarousel = () => {
         >
           <div className="relative w-full h-full">
             <img
-              src={images[currentIndex].url}
+              src={images[currentIndex].url} 
               alt={`Project view ${currentIndex + 1}`}
               className="w-full h-full object-cover"
+              loading={currentIndex === 0 ? "eager" : "lazy"}
+              width="1200"
+              height="800"
+              onLoad={() => handleImageLoad(currentIndex)}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
             
