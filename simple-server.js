@@ -32,9 +32,9 @@ const Enquiry = mongoose.model('Enquiry', enquirySchema);
 
 // CORS configuration
 app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type']
+  origin: ['http://localhost:3000', 'http://localhost:5173'], // Add any other origins as needed
+  methods: ['GET', 'POST', 'DELETE', 'PUT'],
+  credentials: true
 }));
 
 // Middleware
@@ -113,6 +113,32 @@ app.get('/api/enquiries', async (req, res) => {
       success: false,
       message: 'Error fetching enquiries',
       error: error.message
+    });
+  }
+});
+
+// Add an endpoint to delete an enquiry by ID
+app.delete('/api/enquiry/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await Enquiry.findByIdAndDelete(id);
+    
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        error: 'Enquiry not found'
+      });
+    }
+    
+    res.json({
+      success: true,
+      message: 'Enquiry deleted successfully'
+    });
+  } catch (error) {
+    console.error('Error deleting enquiry:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Server error while deleting enquiry'
     });
   }
 });

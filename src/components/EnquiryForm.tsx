@@ -95,8 +95,7 @@ export const EnquiryForm = ({ isOpen, onClose }: EnquiryFormProps) => {
       // After 2 seconds, close the form and redirect to thank you page
       setTimeout(() => {
         onClose();
-        // Fixed: Make sure we're using the correct path and forcing a navigation
-        navigate('/thank-you', { replace: true });
+        window.location.href = '/thank-you'; // Use window.location for navigation
       }, 2000);
       
     } catch (error) {
