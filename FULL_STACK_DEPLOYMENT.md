@@ -30,7 +30,6 @@ We'll use Render.com to deploy the entire stack as a single application. This ap
    - Select "Connect your application"
    - Copy the connection string, which looks like:
      ```
-     mongodb+srv://soh4m:NewL!ght_2911@swastik-platinum.ldaunyf.mongodb.net/swastik-platinum?retryWrites=true&w=majority&appName=swastik-platinum
      ```
    - Replace `<password>` with your actual database user password
 
