@@ -101,7 +101,7 @@ export const LocationAdvantage = () => {
   const activeCategoryName = categories.find(cat => cat.id === activeCategory)?.name || '';
 
   return (
-    <div className="max-w-6xl mx-auto relative">
+    <div className="max-w-6xl mx-auto relative mb-20 sm:mb-32"> {/* Added increased bottom margin here */}
       
       {/* Category indicator */}
       <div className="flex justify-center items-center mb-8">
