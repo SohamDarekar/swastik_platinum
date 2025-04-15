@@ -14,10 +14,10 @@ const photoCategories = [
 
 const photos = {
   external: [
-    '/assets/external_1.png',
     '/assets/external_2.png',
     '/assets/external_3.png',
     '/assets/external_4.png',
+    '/assets/external_1.png',
   ],
   internal: [
     '/assets/internal_1.png',

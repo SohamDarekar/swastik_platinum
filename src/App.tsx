@@ -21,6 +21,11 @@ const ProjectHighlights = lazy(() => import('./components/ProjectHighlights').th
 const Gallery = lazy(() => import('./components/Gallery').then(module => ({ default: module.Gallery })));
 import Admin from './pages/Admin';
 import { ThankYou } from './pages/ThankYou'; // Make sure this import is correct
+import AboutDeveloper from './pages/AboutDeveloper';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsAndConditions from './pages/TermsAndConditions';
+import Disclaimer from './pages/Disclaimer';
+import Sitemap from './pages/Sitemap';
 
 // Existing App component that renders the home page
 function HomeContent() {
@@ -67,6 +72,7 @@ function HomeContent() {
     setIsModalOpen(true);
   };
 
+  // Function to scroll to top
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -75,7 +81,7 @@ function HomeContent() {
     const overviewSection = document.getElementById('overview-content');
     if (overviewSection) {
       // Adjust the scroll position to account for fixed header and scroll below the MahaRERA section
-      const yOffset = overviewSection.offsetHeight; // Add height of the MahaRERA section
+      const yOffset = overviewSection.offsetHeight;
       const y = overviewSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
@@ -117,7 +123,6 @@ function HomeContent() {
                 </div>
               </a>
             </div>
-
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
               <div className="flex items-center space-x-5 xl:space-x-7">
@@ -183,7 +188,6 @@ function HomeContent() {
                 </Button>
               </div>
             </div>
-
             {/* Mobile Menu Button */}
             <button
               className="lg:hidden p-2"
@@ -195,7 +199,6 @@ function HomeContent() {
           </div>
         </div>
       </nav>
-
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
@@ -261,9 +264,7 @@ function HomeContent() {
                 >
                   Gallery
                 </a>
-
                 <div className="w-1/3 h-px bg-white/20 my-2"></div>
-
                 <Link
                   to="/about-developer"
                   onClick={() => setMobileMenuOpen(false)}
@@ -289,7 +290,6 @@ function HomeContent() {
           </motion.div>
         )}
       </AnimatePresence>
-
       {/* Hero Section */}
       <section
         id="overview"
@@ -351,7 +351,6 @@ function HomeContent() {
           <CircleIcon onClick={scrollToOverview} ariaLabel="Scroll to project overview" />
         </motion.div>
       </section>
-
       {/* MahaRERA Info Bar */}
       <div className="bg-primary text-white py-3 px-4" id="overview-content">
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center text-center md:text-left">
@@ -366,14 +365,12 @@ function HomeContent() {
           </a>
         </div>
       </div>
-
       {/* Project Highlights */}
       <AnimatedSection>
         <Suspense fallback={<LoadingSpinner />}>
           <ProjectHighlights />
         </Suspense>
       </AnimatedSection>
-
       {/* Overview Section */}
       <AnimatedSection>
         <section className="py-16 sm:py-20 bg-white">
@@ -414,7 +411,6 @@ function HomeContent() {
           </div>
         </section>
       </AnimatedSection>
-
       {/* Configuration Cards */}
       <AnimatedSection>
         <section id="configurations" className="py-20 bg-accent">
@@ -430,7 +426,6 @@ function HomeContent() {
           </div>
         </section>
       </AnimatedSection>
-
       {/* Location Advantage */}
       <AnimatedSection>
         <section id="location" className="py-20 bg-white">
@@ -448,21 +443,18 @@ function HomeContent() {
               WHERE YOU REDISCOVER LIFE
             </h3>
             <div className="w-20 h-1 bg-secondary mx-auto mb-16"></div>
-
             {/* Added ImageCarousel here before the Gallery component */}
             <div className="mb-16 overflow-hidden rounded-lg shadow-xl">
               <Suspense fallback={<LoadingSpinner />}>
                 <ImageCarousel />
               </Suspense>
             </div>
-
             <Suspense fallback={<LoadingSpinner />}>
               <Gallery />
             </Suspense>
           </div>
         </section>
       </AnimatedSection>
-
       {/* Amenities Section */}
       <AnimatedSection>
         <section id="amenities" className="py-20 bg-white">
@@ -478,7 +470,6 @@ function HomeContent() {
           </div>
         </section>
       </AnimatedSection>
-
       {/* Footer */}
       <footer className="bg-primary text-white pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
         <div className="container mx-auto px-4 sm:px-6">
@@ -695,7 +686,6 @@ function HomeContent() {
           </div>
         </div>
       </footer>
-
       {/* Right side enquiry floating tab - hidden on small screens */}
       <div className="fixed right-0 top-1/2 transform -translate-y-1/2 z-40 hidden md:block">
         <button
@@ -706,7 +696,6 @@ function HomeContent() {
           ENQUIRE NOW
         </button>
       </div>
-
       {/* Fixed Enquiry Button */}
       <div className="fixed bottom-8 right-8 z-40">
         <Button
@@ -719,7 +708,6 @@ function HomeContent() {
           <span className="sm:hidden">ENQUIRE NOW</span>
         </Button>
       </div>
-
       {/* Scroll To Top Button */}
       <AnimatePresence>
         {showScrollTop && (
@@ -734,7 +722,6 @@ function HomeContent() {
           </motion.button>
         )}
       </AnimatePresence>
-
       {/* Enquiry Form Modal - always open on page load/refresh */}
       <EnquiryForm isOpen={isModalOpen} onClose={handleCloseForm} />
     </div>
@@ -759,8 +746,13 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomeContent />} />
+        <Route path="/about-developer" element={<AboutDeveloper />} />
         <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+        <Route path="/disclaimer" element={<Disclaimer />} />
+        <Route path="/sitemap" element={<Sitemap />} />
       </Routes>
     </Router>
   );
