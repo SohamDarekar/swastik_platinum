@@ -38,7 +38,12 @@ const Enquiry = mongoose.model('Enquiry', enquirySchema);
 
 // CORS configuration
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5173', process.env.FRONTEND_URL || '*'],
+  origin: [
+    'http://localhost:3000', 
+    'http://localhost:5173', 
+    'https://swastik-platinum.onrender.com', // Add your Render frontend URL
+    process.env.FRONTEND_URL || '*'
+  ],
   methods: ['GET', 'POST', 'DELETE', 'PUT'],
   credentials: true
 }));
@@ -151,6 +156,11 @@ app.delete('/api/enquiry/:id', async (req, res) => {
       error: 'Server error while deleting enquiry'
     });
   }
+});
+
+// Default route for /api
+app.get('/api', (req, res) => {
+  res.status(404).json({ error: 'API endpoint not found' });
 });
 
 // Serve static files if in production

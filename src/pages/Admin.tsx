@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { convertToCSV, downloadCSV, getFormattedDate } from '../lib/exportUtils';
 import { Eye, EyeOff } from 'lucide-react';
-import { fetchEnquiries } from '../lib/api'; // Import fetchEnquiries function
 
 // Get the API_URL from the environment or use the same logic as in api.ts
 const API_URL = import.meta.env.VITE_API_URL || 
                 (import.meta.env.PROD 
-                  ? '/api'  // In production, use relative path
+                  ? 'https://swastik-platinum.onrender.com/api'  // Use deployed backend URL
                   : 'http://localhost:5000/api');
 
 interface Enquiry {
@@ -35,27 +34,8 @@ export const Admin = () => {
   
   const CORRECT_PASSWORD = 'MegaplexPrime';
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchEnquiries();
-    }
-  }, [isAuthenticated]);
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password === CORRECT_PASSWORD) {
-      setIsAuthenticated(true);
-      setPasswordError('');
-    } else {
-      setPasswordError('Incorrect password. Please try again.');
-    }
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const fetchEnquiries = async () => {
+  // Use useCallback to prevent the function from being recreated on each render
+  const fetchEnquiries = useCallback(async () => {
     try {
       setLoading(true);
       const response = await fetch(`${API_URL}/enquiry`);
@@ -77,6 +57,26 @@ export const Admin = () => {
     } finally {
       setLoading(false);
     }
+  }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchEnquiries();
+    }
+  }, [isAuthenticated, fetchEnquiries]);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === CORRECT_PASSWORD) {
+      setIsAuthenticated(true);
+      setPasswordError('');
+    } else {
+      setPasswordError('Incorrect password. Please try again.');
+    }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleExport = () => {
