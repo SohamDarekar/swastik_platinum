@@ -65,3 +65,5 @@ export const Disclaimer = () => {
     </div>
   );
 };
+
+export default Disclaimer;

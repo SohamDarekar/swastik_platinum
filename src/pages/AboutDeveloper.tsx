@@ -201,3 +201,5 @@ export const AboutDeveloper = () => {
     </div>
   );
 };
+
+export default AboutDeveloper;

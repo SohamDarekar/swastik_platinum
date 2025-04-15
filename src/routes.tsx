@@ -2,13 +2,15 @@ import React, { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { LoadingSpinner } from './components/LoadingSpinner';
 
-// Lazy load components
+// Simplify the lazy loading - don't use the complex module structure
 const App = lazy(() => import('./App'));
-const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy').then(module => ({ default: module.PrivacyPolicy })));
-const TermsAndConditions = lazy(() => import('./pages/TermsAndConditions').then(module => ({ default: module.TermsAndConditions })));
-const Disclaimer = lazy(() => import('./pages/Disclaimer').then(module => ({ default: module.Disclaimer })));
-const Sitemap = lazy(() => import('./pages/Sitemap').then(module => ({ default: module.Sitemap })));
-const AboutDeveloper = lazy(() => import('./pages/AboutDeveloper').then(module => ({ default: module.AboutDeveloper })));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsAndConditions = lazy(() => import('./pages/TermsAndConditions'));
+const Disclaimer = lazy(() => import('./pages/Disclaimer'));
+const Sitemap = lazy(() => import('./pages/Sitemap'));
+const AboutDeveloper = lazy(() => import('./pages/AboutDeveloper'));
+const ThankYou = lazy(() => import('./pages/ThankYou'));
+const Admin = lazy(() => import('./pages/Admin'));
 
 export const AppRoutes = () => {
   return (
@@ -20,6 +22,8 @@ export const AppRoutes = () => {
         <Route path="/disclaimer" element={<Disclaimer />} />
         <Route path="/sitemap" element={<Sitemap />} />
         <Route path="/about-developer" element={<AboutDeveloper />} />
+        <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </Suspense>
   );
