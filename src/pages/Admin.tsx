@@ -17,6 +17,7 @@ export const Admin = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isExporting, setIsExporting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState<string | null>(null);
 
   useEffect(() => {
     fetchEnquiries();
@@ -77,6 +78,38 @@ export const Admin = () => {
     }
   };
 
+  const handleDelete = async (id: string) => {
+    // Show confirmation dialog
+    if (!window.confirm('Are you sure you want to delete this enquiry? This action cannot be undone.')) {
+      return;
+    }
+
+    try {
+      setIsDeleting(id);
+      const response = await fetch(`http://localhost:5000/api/enquiry/${id}`, {
+        method: 'DELETE',
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to delete enquiry');
+      }
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        // Remove the deleted enquiry from the state
+        setEnquiries(enquiries.filter(enquiry => enquiry._id !== id));
+      } else {
+        throw new Error(data.error || 'Failed to delete enquiry');
+      }
+    } catch (error) {
+      console.error('Error deleting enquiry:', error);
+      alert(error instanceof Error ? error.message : 'An error occurred while deleting the enquiry');
+    } finally {
+      setIsDeleting(null);
+    }
+  };
+
   if (loading) {
     return (
       <div className="container mx-auto px-4 py-12">
@@ -133,6 +166,7 @@ export const Admin = () => {
               <th className="py-2 px-4 border-b text-left">Schedule Visit</th>
               <th className="py-2 px-4 border-b text-left">Source</th>
               <th className="py-2 px-4 border-b text-left">Date</th>
+              <th className="py-2 px-4 border-b text-left">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -145,12 +179,35 @@ export const Admin = () => {
                 <td className="py-2 px-4 border-b">{enquiry.scheduleVisit ? 'Yes' : 'No'}</td>
                 <td className="py-2 px-4 border-b">{enquiry.source}</td>
                 <td className="py-2 px-4 border-b">{new Date(enquiry.createdAt).toLocaleString()}</td>
+                <td className="py-2 px-4 border-b">
+                  <button
+                    onClick={() => handleDelete(enquiry._id)}
+                    disabled={isDeleting === enquiry._id}
+                    className={`p-2 rounded ${
+                      isDeleting === enquiry._id
+                        ? 'bg-gray-300 cursor-not-allowed'
+                        : 'bg-red-600 hover:bg-red-700 text-white'
+                    }`}
+                    title="Delete this enquiry"
+                  >
+                    {isDeleting === enquiry._id ? (
+                      'Deleting...'
+                    ) : (
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                      </svg>
+                    )}
+                  </button>
+                </td>
               </tr>
             ))}
             
             {enquiries.length === 0 && (
               <tr>
-                <td colSpan={7} className="py-4 px-4 text-center text-gray-500">
+                <td colSpan={8} className="py-4 px-4 text-center text-gray-500">
                   No enquiries found.
                 </td>
               </tr>
