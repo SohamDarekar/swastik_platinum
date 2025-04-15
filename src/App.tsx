@@ -19,13 +19,15 @@ const ConfigurationCards = lazy(() => import('./components/ConfigurationCards').
 const Amenities = lazy(() => import('./components/Amenities').then(module => ({ default: module.Amenities })));
 const ProjectHighlights = lazy(() => import('./components/ProjectHighlights').then(module => ({ default: module.ProjectHighlights })));
 const Gallery = lazy(() => import('./components/Gallery').then(module => ({ default: module.Gallery })));
+
+// Import pages/components used in routes
 import Admin from './pages/Admin';
-import { ThankYou } from './pages/ThankYou'; // Make sure this import is correct
-import AboutDeveloper from './pages/AboutDeveloper';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsAndConditions from './pages/TermsAndConditions';
-import Disclaimer from './pages/Disclaimer';
-import Sitemap from './pages/Sitemap';
+import { ThankYou } from './pages/ThankYou';
+import { AboutDeveloper } from './pages/AboutDeveloper';
+import { Disclaimer } from './pages/Disclaimer';
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
+import { TermsAndConditions } from './pages/TermsAndConditions';
+import { Sitemap } from './pages/Sitemap';
 
 // Existing App component that renders the home page
 function HomeContent() {
@@ -748,11 +750,11 @@ function App() {
         <Route path="/" element={<HomeContent />} />
         <Route path="/about-developer" element={<AboutDeveloper />} />
         <Route path="/thank-you" element={<ThankYou />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/disclaimer" element={<Disclaimer />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-        <Route path="/disclaimer" element={<Disclaimer />} />
         <Route path="/sitemap" element={<Sitemap />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </Router>
   );

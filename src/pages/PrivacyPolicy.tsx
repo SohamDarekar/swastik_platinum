@@ -1,81 +1,89 @@
 import React from 'react';
-import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Button } from '../components/Button';
+import { ChevronLeft } from 'lucide-react';
 
-export const PrivacyPolicy = () => {
-  // Scroll to top when component mounts
-  React.useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
+export function PrivacyPolicy() {
   return (
-    <div className="bg-white min-h-screen pt-20 sm:pt-24 pb-16 sm:pb-20">
-      <div className="container mx-auto px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto">
-          <Link to="/" className="inline-flex items-center gap-2 text-secondary hover:underline mb-6 sm:mb-8">
-            <ArrowLeft className="w-4 h-4" /> Back to Home
-          </Link>
-
-          <h1 className="font-heading text-3xl sm:text-4xl font-bold mb-6 sm:mb-8">Privacy Policy</h1>
+    <div className="bg-white min-h-screen">
+      <div className="bg-primary py-12">
+        <div className="container mx-auto px-4">
+          <h1 className="text-4xl font-heading font-bold text-white text-center">Privacy Policy</h1>
+        </div>
+      </div>
+      
+      <div className="container mx-auto px-4 py-12 max-w-4xl">
+        <div className="bg-white rounded-lg p-6 shadow-sm">
+          <h2 className="text-2xl font-bold mb-6 text-primary">Swastik Platinum Privacy Policy</h2>
           
-          <div className="prose max-w-none text-gray-700 text-sm sm:text-base">
-            <p className="mb-6">
-              Last updated: April 15, 2025
-            </p>
-
-            <h2 className="font-heading text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 mt-6 sm:mt-8">1. Introduction</h2>
-            <p className="mb-4">
-              Swastik Developers ("we," "our," or "us") respects your privacy and is committed to protecting it through our compliance with this policy. This policy describes the types of information we may collect from you or that you may provide when you visit the website swastikplatinum.com (our "Website") and our practices for collecting, using, maintaining, protecting, and disclosing that information.
-            </p>
-
-            <h2 className="font-heading text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 mt-6 sm:mt-8">2. Information We Collect</h2>
-            <p className="mb-4">
-              We collect several types of information from and about users of our Website, including information:
-            </p>
-            <ul className="list-disc pl-6 mb-4 space-y-2">
-              <li>By which you may be personally identified, such as name, postal address, e-mail address, telephone number, or any other identifier by which you may be contacted online or offline ("personal information");</li>
-              <li>That is about you but individually does not identify you; and/or</li>
-              <li>About your internet connection, the equipment you use to access our Website, and usage details.</li>
-            </ul>
+          <p className="mb-4">Last updated: Apr 2025</p>
+          
+          <div className="space-y-6">
+            <section>
+              <h3 className="text-xl font-bold mb-3 text-secondary">1. Information We Collect</h3>
+              <p className="mb-2">We collect information when you submit an enquiry form or contact us. This may include:</p>
+              <ul className="list-disc pl-6 mb-4 space-y-1">
+                <li>Personal information such as name, email address, phone number</li>
+                <li>Communication preferences</li>
+                <li>Information about your property requirements</li>
+              </ul>
+            </section>
             
-            <h2 className="font-heading text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 mt-6 sm:mt-8">3. How We Collect Your Information</h2>
-            <p className="mb-4">
-              We collect this information:
-            </p>
-            <ul className="list-disc pl-6 mb-4 space-y-2">
-              <li>Directly from you when you provide it to us.</li>
-              <li>Automatically as you navigate through the site. Information collected automatically may include usage details, IP addresses, and information collected through cookies and other tracking technologies.</li>
-            </ul>
-
-            <h2 className="font-heading text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 mt-6 sm:mt-8">4. How We Use Your Information</h2>
-            <p className="mb-4">
-              We use information that we collect about you or that you provide to us, including any personal information:
-            </p>
-            <ul className="list-disc pl-6 mb-4 space-y-2">
-              <li>To present our Website and its contents to you.</li>
-              <li>To provide you with information, products, or services that you request from us.</li>
-              <li>To fulfill any other purpose for which you provide it.</li>
-              <li>To carry out our obligations and enforce our rights arising from any contracts entered into between you and us.</li>
-              <li>To notify you about changes to our Website or any products or services we offer or provide through it.</li>
-              <li>In any other way we may describe when you provide the information.</li>
-              <li>For any other purpose with your consent.</li>
-            </ul>
-
-            <h2 className="font-heading text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 mt-6 sm:mt-8">5. Contact Information</h2>
-            <p className="mb-4">
-              If you have any questions or concerns about this Privacy Policy, please contact us at:
-            </p>
-            <p className="mb-4">
-              Swastik Developers<br />
-              Vikhroli East, Mumbai – 400083<br />
-              Email: privacy@swastikplatinum.com<br />
-              Phone: +91 99999 99999
-            </p>
+            <section>
+              <h3 className="text-xl font-bold mb-3 text-secondary">2. How We Use Your Information</h3>
+              <p className="mb-2">The information we collect may be used to:</p>
+              <ul className="list-disc pl-6 mb-4 space-y-1">
+                <li>Respond to your enquiries about our properties</li>
+                <li>Provide you with information about our developments</li>
+                <li>Improve our website and services</li>
+                <li>Send you marketing communications (with your consent)</li>
+              </ul>
+            </section>
+            
+            <section>
+              <h3 className="text-xl font-bold mb-3 text-secondary">3. Information Sharing</h3>
+              <p className="mb-4">We do not sell or rent your personal information to third parties. We may share your information with:</p>
+              <ul className="list-disc pl-6 mb-4 space-y-1">
+                <li>Service providers who assist us in operating our business</li>
+                <li>Legal authorities when required by law</li>
+              </ul>
+            </section>
+            
+            <section>
+              <h3 className="text-xl font-bold mb-3 text-secondary">4. Your Rights</h3>
+              <p className="mb-4">You have the right to:</p>
+              <ul className="list-disc pl-6 mb-4 space-y-1">
+                <li>Access the personal information we hold about you</li>
+                <li>Request correction of inaccurate information</li>
+                <li>Request deletion of your data</li>
+                <li>Opt-out of marketing communications</li>
+              </ul>
+            </section>
+            
+            <section>
+              <h3 className="text-xl font-bold mb-3 text-secondary">5. Security</h3>
+              <p className="mb-4">We implement appropriate security measures to protect your personal information from unauthorized access, alteration, or disclosure.</p>
+            </section>
+            
+            <section>
+              <h3 className="text-xl font-bold mb-3 text-secondary">6. Contact Us</h3>
+              <p className="mb-4">If you have questions about this Privacy Policy, please contact us at:</p>
+              <p className="mb-1">Email: privacy@swastikgroup.in</p>
+              <p>Phone: +91 9321411424</p>
+            </section>
+          </div>
+          
+          <div className="mt-8">
+            <Link to="/">
+              <Button variant="outline" className="flex items-center gap-2">
+                <ChevronLeft className="w-4 h-4" /> Back to Home
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default PrivacyPolicy;

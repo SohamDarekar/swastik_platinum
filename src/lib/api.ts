@@ -1,6 +1,10 @@
 import { EnquiryFormData, ApiResponse } from '../types/enquiry';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Dynamic API URL for development/production environments
+const API_URL = import.meta.env.VITE_API_URL || 
+                (import.meta.env.PROD 
+                  ? 'https://swastik-platinum-api.onrender.com/api'  // Update this with your actual Render URL
+                  : 'http://localhost:5000/api');
 
 export async function submitEnquiry(data: EnquiryFormData): Promise<ApiResponse> {
   try {

@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "dev:client": "vite",
     "simple-server": "node simple-server.js",
-    "dev:simple": "concurrently \"npm run dev:client\" \"npm run simple-server\""
+    "dev:simple": "concurrently \"npm run dev:client\" \"npm run simple-server\"",
+    "start": "NODE_ENV=production node simple-server.js",
+    "build:full": "npm run build && npm run start"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",

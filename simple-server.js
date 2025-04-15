@@ -1,13 +1,19 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Get current directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Initialize express app
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
-// MongoDB connection
-const MONGODB_URI = 'mongodb://localhost:27017/swastik-platinum';
+// MongoDB connection - use Atlas in production, local in development
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/swastik-platinum';
 
 // Connect to MongoDB
 mongoose.connect(MONGODB_URI)
@@ -32,7 +38,7 @@ const Enquiry = mongoose.model('Enquiry', enquirySchema);
 
 // CORS configuration
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5173'], // Add any other origins as needed
+  origin: ['http://localhost:3000', 'http://localhost:5173', process.env.FRONTEND_URL || '*'],
   methods: ['GET', 'POST', 'DELETE', 'PUT'],
   credentials: true
 }));
@@ -42,7 +48,11 @@ app.use(express.json());
 
 // Basic route
 app.get('/api/health', (req, res) => {
-  res.json({ message: 'API is running' });
+  res.json({ 
+    message: 'API is running', 
+    environment: process.env.NODE_ENV || 'development',
+    timestamp: new Date().toISOString()
+  });
 });
 
 // Enquiry submission endpoint with MongoDB storage
@@ -143,7 +153,25 @@ app.delete('/api/enquiry/:id', async (req, res) => {
   }
 });
 
+// Serve static files if in production
+if (process.env.NODE_ENV === 'production') {
+  // Serve static files from the 'dist' directory
+  app.use(express.static(path.join(__dirname, 'dist')));
+  
+  // Handle React routing, return all requests to React app
+  app.get('*', (req, res) => {
+    if (req.url.startsWith('/api')) {
+      // If it's an API request that wasn't caught by previous routes, return 404
+      return res.status(404).json({ error: 'API endpoint not found' });
+    }
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  });
+  
+  console.log('Running in production mode - serving static files');
+}
+
 // Start server
 app.listen(PORT, () => {
-  console.log(`Simple server running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });

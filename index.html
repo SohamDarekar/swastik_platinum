@@ -13,6 +13,19 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <meta name="description" content="Swastik Platinum - 22 storeys of elegance in Vikhroli East offering luxurious 1 & 2 BHK residences with premium amenities and stunning city views.">
+    <script>
+      // Redirect handling for SPA routing
+      (function() {
+        // Retrieve the URL the user was trying to access
+        var redirect = sessionStorage.redirect;
+        // Remove the redirect from sessionStorage
+        delete sessionStorage.redirect;
+        // If there was a redirect, replace the current URL with it
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
