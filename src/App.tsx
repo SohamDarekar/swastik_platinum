@@ -7,6 +7,8 @@ import { AnimatedSection } from './components/AnimatedSection';
 import { CircleIcon } from './components/CircleIcon';
 import { Link } from 'react-router-dom';
 import { LoadingSpinner } from './components/LoadingSpinner';
+import { cn } from './lib/utils';
+import { downloadFile } from './lib/utils';
 
 // Lazy load components
 const ImageCarousel = lazy(() => import('./components/ImageCarousel').then(module => ({ default: module.ImageCarousel })));
@@ -287,10 +289,18 @@ function App() {
                 Embark on a life beyond the ordinary, where the boundaries between nature and city life seamlessly merge. Nestled in Vikhroli East, presenting Swastik Platinum, an exclusive haven with 1 & 2 BHK luxurious balcony residences. Escape the mundane as your balcony transforms into a sanctuary, granting you breathtaking views of the city.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-                <Button variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-white text-sm sm:text-base">
+                <Button 
+                  variant="outline" 
+                  className="border-secondary text-secondary hover:bg-secondary hover:text-white text-sm sm:text-base"
+                  onClick={() => downloadFile('/assets/brochure.pdf', 'SwastikPlatinum-Brochure.pdf')}
+                >
                   <Download className="w-4 h-4 mr-2" /> DOWNLOAD BROCHURE
                 </Button>
-                <Button variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-white text-sm sm:text-base mt-3 sm:mt-0">
+                <Button 
+                  variant="outline" 
+                  className="border-secondary text-secondary hover:bg-secondary hover:text-white text-sm sm:text-base mt-3 sm:mt-0"
+                  onClick={() => downloadFile('/assets/floorplans.pdf', 'SwastikPlatinum-FloorPlans.pdf')}
+                >
                   <Download className="w-4 h-4 mr-2" /> DOWNLOAD FLOOR PLANS
                 </Button>
               </div>
@@ -323,28 +333,6 @@ function App() {
             <Suspense fallback={<LoadingSpinner />}>
               <LocationAdvantage />
             </Suspense>
-          </div>
-        </section>
-      </AnimatedSection>
-
-      {/* Amenities */}
-      <AnimatedSection>
-        <section id="amenities" className="py-20 bg-accent">
-          <div className="container mx-auto px-6">
-            <h2 className="font-heading text-4xl font-bold text-center mb-4">AMENITIES</h2>
-            <h3 className="text-xl text-center mb-4 text-gray-600 font-light">WHERE LUXURY LIFE REIGNS SUPREME</h3>
-            <div className="w-20 h-1 bg-secondary mx-auto mb-16"></div>
-            <Suspense fallback={<LoadingSpinner />}>
-              <Amenities />
-            </Suspense>
-          </div>
-        </section>
-      </AnimatedSection>
-
-      {/* Gallery Section */}
-      <AnimatedSection>
-        <section id="gallery" className="py-20 bg-white">
-          <div className="container mx-auto px-6">
             <h2 className="font-heading text-4xl font-bold text-center mb-4">GALLERY</h2>
             <h3 className="text-xl text-center mb-4 text-gray-600 font-light">WHERE YOU REDISCOVER LIFE</h3>
             <div className="w-20 h-1 bg-secondary mx-auto mb-16"></div>
@@ -363,10 +351,22 @@ function App() {
         </section>
       </AnimatedSection>
 
-      
+      {/* Amenities Section */}
+      <AnimatedSection>
+        <section id="amenities" className="py-20 bg-white">
+          <div className="container mx-auto px-6">
+            <h2 className="font-heading text-4xl font-bold text-center mb-4">AMENITIES</h2>
+            <h3 className="text-xl text-center mb-4 text-gray-600 font-light">WHERE LUXURY LIFE REIGNS SUPREME</h3>
+            <div className="w-20 h-1 bg-secondary mx-auto mb-16"></div>
+            <Suspense fallback={<LoadingSpinner />}>
+              <Amenities />
+            </Suspense>
+          </div>
+        </section>
+      </AnimatedSection>
 
       {/* Footer */}
-        <footer className="bg-primary text-white pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
+      <footer className="bg-primary text-white pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-10">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
             <div>
@@ -376,7 +376,7 @@ function App() {
                     src="/logo.png" 
                     alt="Swastik Platinum Logo" 
                     className="h-10 w-10 mr-2"
-                    loading="lazy"
+                    loading="lazy" 
                     width="40"
                     height="40"
                   />
@@ -400,7 +400,7 @@ function App() {
               </div>
             </div>
             <div className="mt-8 sm:mt-0">
-              <h3 className="bg-secondary font-heading text-lg sm:text-xl font-bold mb-4 sm:mb-6 bg-secondary py-1 px-3 rounded-sm shadow-md inline-block mb-6">Quick Links</h3>
+              <h3 className="font-heading text-lg sm:text-xl font-bold mb-4 sm:mb-6 bg-secondary py-1 px-3 rounded-sm shadow-md inline-block mb-6">Quick Links</h3>
               <ul className="grid grid-cols-2 sm:grid-cols-1 gap-2 sm:gap-4">
                 <li><a href="#overview" className="text-white/80 hover:text-secondary transition-colors text-sm sm:text-base">Overview</a></li>
                 <li><a href="#configurations" className="text-white/80 hover:text-secondary transition-colors text-sm sm:text-base">Configurations</a></li>
@@ -464,7 +464,7 @@ function App() {
 
       {/* Fixed Enquiry Button */}
       <div className="fixed bottom-8 right-8 z-40">
-        <Button
+        <Button 
           onClick={showForm}
           variant="secondary"
           size="lg"

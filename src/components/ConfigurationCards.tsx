@@ -4,6 +4,7 @@ import { Check, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { EnquiryForm } from './EnquiryForm';
+import { downloadFile } from '../lib/utils';
 
 const configurations = [
   {
@@ -96,6 +97,13 @@ export const ConfigurationCards = () => {
             <Button 
               variant="secondary" 
               className="w-full text-sm sm:text-base"
+              onClick={() => {
+                const floorPlanType = configurations[selectedConfig].type.replace(' ', '');
+                downloadFile(
+                  `/assets/floorplan-${floorPlanType}.pdf`, 
+                  `SwastikPlatinum-FloorPlan-${configurations[selectedConfig].type}.pdf`
+                );
+              }}
             >
               <Download className="w-4 h-4 mr-2" /> DOWNLOAD FLOOR PLAN
             </Button>
