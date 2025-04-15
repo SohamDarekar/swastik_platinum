@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Button } from './Button';
 import { Check, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { EnquiryForm } from './EnquiryForm';
 
 const configurations = [
   {
@@ -22,6 +24,13 @@ const configurations = [
 
 export const ConfigurationCards = () => {
   const [selectedConfig, setSelectedConfig] = useState(0);
+  const navigate = useNavigate();
+  const [isEnquiryFormOpen, setIsEnquiryFormOpen] = useState(false);
+
+  const handleSiteVisit = () => {
+    // Instead of navigating, open the enquiry form
+    setIsEnquiryFormOpen(true);
+  };
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -93,7 +102,7 @@ export const ConfigurationCards = () => {
             <Button 
               variant="outline" 
               className="w-full border-secondary text-secondary hover:bg-secondary hover:text-white text-sm sm:text-base"
-              onClick={() => {}}
+              onClick={handleSiteVisit}
             >
               BOOK A SITE VISIT
             </Button>
@@ -101,6 +110,12 @@ export const ConfigurationCards = () => {
         </div>
       </motion.div>
       <p className="text-center text-xs sm:text-sm text-gray-500 mt-6 sm:mt-8">*Prices are subject to change. Terms and conditions apply.</p>
+      
+      {/* Enquiry Form Popup */}
+      <EnquiryForm 
+        isOpen={isEnquiryFormOpen} 
+        onClose={() => setIsEnquiryFormOpen(false)} 
+      />
     </div>
   );
 };

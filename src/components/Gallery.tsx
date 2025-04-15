@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const categories = [
@@ -14,45 +14,56 @@ const photoCategories = [
 
 const photos = {
   external: [
-    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=600&h=400',
-    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=600&h=400',
-    'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=600&h=400',
-    'https://images.unsplash.com/photo-1600573472550-8090b5e0745e?auto=format&fit=crop&q=80&w=600&h=400',
+    '/assets/external_1.png',
+    '/assets/external_2.png',
+    '/assets/external_3.png',
+    '/assets/external_4.png',
   ],
   internal: [
-    'https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&q=80&w=600&h=400',
-    'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&q=80&w=600&h=400',
-    'https://images.unsplash.com/photo-1600607687644-c7f34c43d2fd?auto=format&fit=crop&q=80&w=600&h=400',
-    'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&q=80&w=600&h=400',
+    '/assets/internal_1.png',
   ],
   amenities: [
-    'https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?auto=format&fit=crop&q=80&w=600&h=400',
-    'https://images.unsplash.com/photo-1616627561839-074385245ff6?auto=format&fit=crop&q=80&w=600&h=400',
-    'https://images.unsplash.com/photo-1571622840901-92ae138bd36e?auto=format&fit=crop&q=80&w=600&h=400',
-    'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=600&h=400',
+    '/assets/amenities_1.png',
+    '/assets/amenities_2.png',
+    '/assets/amenities_3.png',
+    '/assets/amenities_4.png',
+    '/assets/amenities_5.png',
   ]
 };
 
-const videos = [
-  { thumbnail: 'https://images.unsplash.com/photo-1517164850305-99a27ae571ea?auto=format&fit=crop&q=80&w=600&h=400', title: 'Project Overview' },
-  { thumbnail: 'https://images.unsplash.com/photo-1494932328153-c57e516cbd28?auto=format&fit=crop&q=80&w=600&h=400', title: 'Virtual Tour' },
-  { thumbnail: 'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&q=80&w=600&h=400', title: 'Amenities Showcase' },
-];
+// YouTube video URL for the project overview
+const youtubeVideoUrl = "https://www.youtube.com/embed/aLKJSXiyWbw";
 
 export const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('photos');
   const [selectedPhotoCategory, setSelectedPhotoCategory] = useState('external');
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Define consistent dimensions for all images
+  const imageWidth = 600;
+  const imageHeight = 400;
+
+  // Detect mobile devices
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6">
       {/* Main Category Tabs */}
-      <div className="flex justify-center mb-8 sm:mb-10">
-        <div className="inline-flex border-b border-gray-200">
+      <div className="flex justify-center mb-6 sm:mb-10">
+        <div className="inline-flex border-b border-gray-200 w-full sm:w-auto justify-center">
           {categories.map((category) => (
             <button
               key={category.id}
-              className={`px-6 sm:px-10 py-3 sm:py-4 text-sm font-medium transition-all border-b-2 -mb-px ${
+              className={`px-4 sm:px-10 py-2 sm:py-4 text-sm font-medium transition-all border-b-2 -mb-px ${
                 selectedCategory === category.id 
                   ? 'text-secondary border-secondary' 
                   : 'text-gray-500 border-transparent hover:text-gray-700'
@@ -69,12 +80,12 @@ export const Gallery = () => {
       {selectedCategory === 'photos' && (
         <>
           {/* Photo Category Tabs */}
-          <div className="flex justify-center mb-8 sm:mb-16 overflow-x-auto -mx-4 px-4">
-            <div className="inline-flex">
+          <div className="flex justify-center mb-6 sm:mb-16 overflow-x-auto py-2">
+            <div className="inline-flex space-x-1 sm:space-x-2">
               {photoCategories.map((category) => (
                 <button
                   key={category.id}
-                  className={`px-4 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all ${
+                  className={`px-3 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm font-medium transition-all rounded-md ${
                     selectedPhotoCategory === category.id 
                       ? 'bg-secondary text-white' 
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -88,27 +99,29 @@ export const Gallery = () => {
           </div>
           
           {/* Photos Grid */}
-          <motion.div 
+          <motion.div
             key={selectedPhotoCategory}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8"
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-8"
           >
             {photos[selectedPhotoCategory as keyof typeof photos].map((photo, index) => (
-              <div 
-                key={index} 
-                className="relative overflow-hidden cursor-pointer group"
+              <div
+                key={index}
+                className="relative overflow-hidden cursor-pointer group touch-manipulation"
                 onClick={() => setLightboxImage(photo)}
               >
-                <div className="aspect-w-16 aspect-h-10">
+                <div className={`aspect-w-3 aspect-h-2 ${selectedPhotoCategory === 'external' ? 'h-[400px]' : ''}`}>
                   <img 
-                    src={photo} 
-                    alt={`Gallery image ${index + 1}`} 
-                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                    src={photo}
+                    alt={`Gallery image ${index + 1}`}
+                    className={`w-full transition-transform duration-500 group-hover:scale-110 ${
+                      selectedPhotoCategory === 'external' ? 'h-[400px] object-cover' : 'h-full object-cover'
+                    }`}
                     loading="lazy"
-                    width="600"
-                    height="400"
+                    width={imageWidth}
+                    height={imageHeight}
                   />
                 </div>
                 <div className="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -128,47 +141,39 @@ export const Gallery = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-8"
+          className="w-full max-w-4xl mx-auto"
         >
-          {videos.map((video, index) => (
-            <div key={index} className="overflow-hidden cursor-pointer group">
-              <div className="relative">
-                <img 
-                  src={video.thumbnail} 
-                  alt={video.title} 
-                  className="w-full h-40 sm:h-48 object-cover"
-                  loading="lazy"
-                  width="600"
-                  height="400"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-secondary/90 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                  </div>
-                </div>
-              </div>
-              <div className="p-4">
-                <h3 className="font-medium text-base sm:text-lg">{video.title}</h3>
-              </div>
-            </div>
-          ))}
+          <div className="relative overflow-hidden pt-[56.25%] rounded-lg shadow-lg">
+            <iframe 
+              className="absolute inset-0 w-full h-full border-0"
+              src={youtubeVideoUrl}
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+          <div className="p-4 text-center">
+            <h3 className="font-medium text-lg sm:text-xl">Project Overview Video</h3>
+          </div>
         </motion.div>
       )}
 
       {/* Lightbox */}
       {lightboxImage && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4"
+        <div
+          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 touch-manipulation"
           onClick={() => setLightboxImage(null)}
         >
-          <div className="relative max-w-6xl max-h-[90vh]">
+          <div className="relative max-w-full max-h-[90vh] w-auto h-auto">
             <img 
-              src={lightboxImage} 
+              src={lightboxImage}
               alt="Enlarged view" 
               className="max-w-full max-h-[90vh] object-contain"
+              width={imageWidth}
+              height={imageHeight}
             />
             <button 
-              className="absolute top-4 right-4 bg-white rounded-full p-2"
+              className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white rounded-full p-2 z-10 shadow-lg"
               onClick={(e) => {
                 e.stopPropagation();
                 setLightboxImage(null);
@@ -177,6 +182,12 @@ export const Gallery = () => {
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
+            {/* Mobile-friendly navigation instructions */}
+            {isMobile && (
+              <div className="absolute bottom-4 left-0 right-0 text-center text-white text-sm bg-black bg-opacity-50 py-2">
+                Tap anywhere to close
+              </div>
+            )}
           </div>
         </div>
       )}

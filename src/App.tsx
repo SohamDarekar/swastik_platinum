@@ -387,15 +387,15 @@ function App() {
               <div className="space-y-3 sm:space-y-4">
                 <p className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 mt-0.5 text-secondary flex-shrink-0" />
-                  <span className="text-white/80 text-sm sm:text-base">Vikhroli East, Mumbai – 400083</span>
+                  <span className="text-white/80 text-sm sm:text-base">312, Swastik Disa Corporate Park, Opp. Shreyas Cinemas, LBS Rd, Ghatkopar(West), Mumbai-86</span>
                 </p>
                 <p className="flex items-start gap-3">
                   <Phone className="w-5 h-5 mt-0.5 text-secondary flex-shrink-0" />
-                  <span className="text-white/80 text-sm sm:text-base">+91 99999 99999</span>
+                  <span className="text-white/80 text-sm sm:text-base">+91 9321411424</span>
                 </p>
                 <p className="flex items-start gap-3">
                   <Mail className="w-5 h-5 mt-0.5 text-secondary flex-shrink-0" />
-                  <span className="text-white/80 text-sm sm:text-base">info@swastikplatinum.com</span>
+                  <span className="text-white/80 text-sm sm:text-base">sales@swastikgroup.in</span>
                 </p>
               </div>
             </div>
