@@ -41,7 +41,8 @@ app.use(cors({
   origin: [
     'http://localhost:3000', 
     'http://localhost:5173', 
-    'https://swastik-platinum.onrender.com', // Add your Render frontend URL
+    'https://swastik-platinum.onrender.com',
+    'https://swastik-platinum.onrender.com/admin', // Add Render frontend URL
     process.env.FRONTEND_URL || '*'
   ],
   methods: ['GET', 'POST', 'DELETE', 'PUT'],
