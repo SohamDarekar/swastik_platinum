@@ -5,6 +5,7 @@ This guide provides step-by-step instructions for deploying the Swastik Platinum
 ## Overview
 
 We'll use Render.com to deploy the entire stack as a single application. This approach ensures that:
+
 - Your frontend is served by the same server that handles API requests
 - Your MongoDB database is properly connected
 - All functionality works just like your local `npm run dev:simple` setup
@@ -13,12 +14,14 @@ We'll use Render.com to deploy the entire stack as a single application. This ap
 
 1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register) and create an account if you don't have one
 2. Set up a free shared cluster:
+
    - Click "Build a Database"
    - Select the free tier (M0)
    - Choose a provider (AWS is recommended) and region (choose one closest to your target audience)
    - Click "Create Cluster"
 
 3. Set up database security:
+
    - Create a database user with a strong password
    - Under Network Access, click "Add IP Address" and select "Allow Access from Anywhere" (you can restrict this later)
 
@@ -27,7 +30,7 @@ We'll use Render.com to deploy the entire stack as a single application. This ap
    - Select "Connect your application"
    - Copy the connection string, which looks like:
      ```
-     mongodb+srv://username:<password>@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority
+     mongodb+srv://soh4m:NewL!ght_2911@swastik-platinum.ldaunyf.mongodb.net/swastik-platinum?retryWrites=true&w=majority&appName=swastik-platinum
      ```
    - Replace `<password>` with your actual database user password
 
@@ -50,6 +53,7 @@ We'll use Render.com to deploy the entire stack as a single application. This ap
 2. From your dashboard, click "New +" and select "Web Service"
 3. Connect your GitHub account and select your repository
 4. Configure your web service:
+
    - **Name**: swastik-platinum
    - **Environment**: Node
    - **Region**: Choose one close to your target audience
@@ -59,6 +63,7 @@ We'll use Render.com to deploy the entire stack as a single application. This ap
    - **Plan**: Free (or choose a paid plan for better performance)
 
 5. Add environment variables:
+
    - Click "Advanced" to expand advanced options
    - Add the following environment variables:
      - **MONGODB_URI**: Your MongoDB Atlas connection string (from Step 1)
@@ -83,18 +88,21 @@ By default, Render will automatically deploy new changes when you push to your G
 ## Troubleshooting
 
 ### If your application fails to start:
+
 1. Check the Render logs for error messages
 2. Common issues:
    - MongoDB connection failure: Verify your connection string and network access settings
    - Build failures: Check if all dependencies are properly included in package.json
 
 ### If form submissions don't work:
+
 1. Open your browser's developer console to check for errors
 2. The most common issue is CORS errors, which our updated server configuration should handle
 
 ## For Your Interview
 
 Share the Render URL with your interviewers and let them know:
+
 1. All features are fully functional, including form submissions and the admin panel
 2. The admin panel can be accessed at `/admin` with password: MegaplexPrime
 3. The project demonstrates your ability to deploy a full-stack application with database connectivity
